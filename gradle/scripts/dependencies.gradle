@@ -63,6 +63,12 @@ dependencies {
     compileOnly "curse.maven:serene-seasons-291874:2799213"
     runtimeOnly "curse.maven:serene-seasons-291874:2799213"
 
+    compileOnly "curse.maven:rftools-dimensions-240950:2707390"
+    runtimeOnly "curse.maven:rftools-dimensions-240950:2707390"
+
+    compileOnly "curse.maven:blood-magic-224791:2822288"
+    runtimeOnly "curse.maven:blood-magic-224791:2822288"
+
     // Example - Modrinth dependencies:
     // 'maven.modrinth:jei:4.16.1.1000' << jei = project name, 4.16.1.1000 = file version
     // Full documentation: https://docs.modrinth.com/docs/tutorials/maven/
