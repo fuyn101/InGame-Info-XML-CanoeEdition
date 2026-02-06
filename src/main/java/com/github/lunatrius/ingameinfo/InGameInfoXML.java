@@ -18,7 +18,10 @@ import java.util.Map;
 
 @Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION, guiFactory = Reference.GUI_FACTORY)
 public class InGameInfoXML {
-    @Instance(Reference.MODID)
+
+    public static final String MODID = Tags.MOD_ID;
+
+    @Instance(InGameInfoXML.MODID)
     public static InGameInfoXML instance;
 
     @SidedProxy(serverSide = Reference.PROXY_SERVER, clientSide = Reference.PROXY_CLIENT)
