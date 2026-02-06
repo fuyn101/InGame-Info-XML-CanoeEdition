@@ -13,13 +13,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class ConfigurationHandler {
     public static Configuration configuration;
 
-    @Config(modid = Reference.MODID, category = Names.Config.Category.VERSION_CHECK)
-    public static class VersionCheck {
-        @RequiresMcRestart
-        @Comment(Names.Config.CHECK_FOR_UPDATES_DESC)
-        public static boolean checkForUpdates = true;
-    }
-
     @SubscribeEvent
     public void onConfigurationChangedEvent(final ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equalsIgnoreCase(Reference.MODID)) {
