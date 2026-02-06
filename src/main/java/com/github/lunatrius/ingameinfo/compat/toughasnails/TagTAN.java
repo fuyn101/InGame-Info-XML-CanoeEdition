@@ -63,7 +63,7 @@ public abstract class TagTAN extends Tag
         }
     }
 
-    static void register() {
+    public static void register() {
         TagRegistry.INSTANCE.register(new TagTAN.CurrentTemp().setName("tancurrtemp"));
         TagRegistry.INSTANCE.register(new TagTAN.TargetTemp().setName("tantargettemp"));
         TagRegistry.INSTANCE.register(new TagTAN.Season().setName("tanseason"));
