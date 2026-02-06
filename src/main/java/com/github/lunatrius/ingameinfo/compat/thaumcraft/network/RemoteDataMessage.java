@@ -1,6 +1,6 @@
 package com.github.lunatrius.ingameinfo.compat.thaumcraft.network;
 
-import com.github.lunatrius.ingameinfo.compat.thaumcraft.IGIThaumcraft;
+import com.github.lunatrius.ingameinfo.network.PacketHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -41,7 +41,7 @@ public class RemoteDataMessage implements IMessage {
                         data.setFloat("LocalVis", AuraHelper.getVis(player.world, player.getPosition()));
                         data.setFloat("LocalFlux", AuraHelper.getFlux(player.world, player.getPosition()));
                         ResponseMessage response = new ResponseMessage(data);
-                        IGIThaumcraft.network.sendTo(response, player);
+                        PacketHandler.INSTANCE.sendTo(response, player);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

@@ -1,7 +1,10 @@
 package com.github.lunatrius.ingameinfo.network;
 
+import com.github.lunatrius.ingameinfo.compat.thaumcraft.network.RemoteDataMessage;
+import com.github.lunatrius.ingameinfo.compat.thaumcraft.network.ResponseMessage;
 import com.github.lunatrius.ingameinfo.network.message.MessageSeed;
 import com.github.lunatrius.ingameinfo.reference.Reference;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -11,5 +14,10 @@ public class PacketHandler {
 
     public static void init() {
         INSTANCE.registerMessage(MessageSeed.class, MessageSeed.class, 0, Side.CLIENT);
+
+        if (Loader.isModLoaded("thaumcraft")) {
+            INSTANCE.registerMessage(ResponseMessage.ResponseHandler.class, ResponseMessage.class, 1, Side.CLIENT);
+            INSTANCE.registerMessage(RemoteDataMessage.Handler.class, RemoteDataMessage.class, 2, Side.SERVER);
+        }
     }
 }

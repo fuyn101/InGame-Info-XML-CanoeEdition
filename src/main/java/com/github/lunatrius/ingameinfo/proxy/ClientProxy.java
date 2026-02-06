@@ -2,6 +2,7 @@ package com.github.lunatrius.ingameinfo.proxy;
 
 import com.github.lunatrius.ingameinfo.InGameInfoCore;
 import com.github.lunatrius.ingameinfo.command.InGameInfoCommand;
+import com.github.lunatrius.ingameinfo.compat.thaumcraft.TagThaumcraft;
 import com.github.lunatrius.ingameinfo.handler.ConfigurationHandler;
 import com.github.lunatrius.ingameinfo.handler.KeyInputHandler;
 import com.github.lunatrius.ingameinfo.handler.Ticker;
@@ -13,6 +14,7 @@ import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.config.GuiConfigEntries;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -52,6 +54,10 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void postInit(final FMLPostInitializationEvent event) {
         TagRegistry.INSTANCE.init();
+
+        if (Loader.isModLoaded("thaumcraft")) {
+            TagThaumcraft.register();
+        }
     }
 
     @Override

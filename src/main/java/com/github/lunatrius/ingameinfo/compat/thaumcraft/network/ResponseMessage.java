@@ -1,7 +1,8 @@
 package com.github.lunatrius.ingameinfo.compat.thaumcraft.network;
 
-import com.github.lunatrius.ingameinfo.compat.thaumcraft.IGIThaumcraft;
+import com.github.lunatrius.ingameinfo.compat.thaumcraft.TagThaumcraft;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -35,10 +36,15 @@ public class ResponseMessage implements IMessage {
         }
 
         @Override
-        public IMessage onMessage(ResponseMessage message, final MessageContext ctx) {
-            if (message.data.hasKey("LocalFlux")) {
-                IGIThaumcraft.cachedData = message.data.copy();
-            }
+        public IMessage onMessage(final ResponseMessage message, final MessageContext ctx) {
+            Minecraft.getMinecraft().addScheduledTask(new Runnable() {
+                @Override
+                public void run() {
+                    if (message.data != null && message.data.hasKey("LocalFlux")) {
+                        TagThaumcraft.cachedData = message.data.copy();
+                    }
+                }
+            });
             return null;
         }
     }
