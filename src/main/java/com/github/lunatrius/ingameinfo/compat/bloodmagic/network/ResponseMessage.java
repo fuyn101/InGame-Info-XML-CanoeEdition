@@ -1,6 +1,6 @@
 package com.github.lunatrius.ingameinfo.compat.bloodmagic.network;
 
-import com.mcupdater.mods.igibloodmagic.IGIBloodMagic;
+import com.github.lunatrius.ingameinfo.compat.bloodmagic.TagBloodMagic;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
@@ -37,7 +37,7 @@ public class ResponseMessage implements IMessage {
         @Override
         public IMessage onMessage(ResponseMessage message, final MessageContext ctx) {
             if (message.data.hasKey("OrbTier")) {
-                IGIBloodMagic.cachedData = message.data.copy();
+                TagBloodMagic.cachedData = message.data.copy();
             }
             return null;
         }

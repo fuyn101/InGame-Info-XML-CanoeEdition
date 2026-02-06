@@ -2,11 +2,16 @@ package com.github.lunatrius.ingameinfo.compat.bloodmagic;
 
 import WayofTime.bloodmagic.util.helper.NetworkHelper;
 import com.github.lunatrius.ingameinfo.compat.bloodmagic.network.RemoteDataMessage;
+import com.github.lunatrius.ingameinfo.network.PacketHandler;
+import com.github.lunatrius.ingameinfo.reference.Reference;
 import com.github.lunatrius.ingameinfo.tag.Tag;
 import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
+import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class TagBloodMagic extends Tag
 {
+    public static NBTTagCompound cachedData = new NBTTagCompound();
+
     @Override
     public String getCategory() {
         return "bloodmagic";
@@ -20,14 +25,14 @@ public abstract class TagBloodMagic extends Tag
         @Override
         public String getValue() {
             try {
-                if (world.isRemote) {
+                if (world != null && world.isRemote) {
                     long delay = (System.currentTimeMillis() - lastRemoteUpdate);
                     if (delay > 500 || delay < 0) {
-                        IGIBloodMagic.network.sendToServer(new RemoteDataMessage());
+                        PacketHandler.INSTANCE.sendToServer(new RemoteDataMessage());
                         lastRemoteUpdate = System.currentTimeMillis();
                     }
-                    return String.valueOf(IGIBloodMagic.cachedData.getTag("CurrentLP"));
-                } else {
+                    return String.valueOf(cachedData.getInteger("CurrentLP"));
+                } else if (player != null) {
                     return String.valueOf(NetworkHelper.getSoulNetwork(player).getCurrentEssence());
                 }
             } catch (Throwable e) {
@@ -41,14 +46,14 @@ public abstract class TagBloodMagic extends Tag
         @Override
         public String getValue() {
             try {
-                if (world.isRemote) {
+                if (world != null && world.isRemote) {
                     long delay = (System.currentTimeMillis() - lastRemoteUpdate);
                     if (delay > 500 || delay < 0) {
-                        IGIBloodMagic.network.sendToServer(new RemoteDataMessage());
+                        PacketHandler.INSTANCE.sendToServer(new RemoteDataMessage());
                         lastRemoteUpdate = System.currentTimeMillis();
                     }
-                    return String.valueOf(IGIBloodMagic.cachedData.getTag("OrbTier"));
-                } else {
+                    return String.valueOf(cachedData.getInteger("OrbTier"));
+                } else if (player != null) {
                     return String.valueOf(NetworkHelper.getSoulNetwork(player).getOrbTier());
                 }
             } catch (Throwable e) {
@@ -65,6 +70,6 @@ public abstract class TagBloodMagic extends Tag
     }
 
     public void log(Tag tag, Throwable ex) {
-        IGIBloodMagic.getLogger().warn(IGIBloodMagic.metadata.modId + ":" + tag.getName(), ex);
+        Reference.logger.warn(Reference.MODID + ":" + tag.getName(), ex);
     }
 }

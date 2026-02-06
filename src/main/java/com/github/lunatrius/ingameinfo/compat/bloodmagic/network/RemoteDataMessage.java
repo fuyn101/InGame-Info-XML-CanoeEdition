@@ -3,6 +3,7 @@ package com.github.lunatrius.ingameinfo.compat.bloodmagic.network;
 import WayofTime.bloodmagic.core.data.SoulNetwork;
 import WayofTime.bloodmagic.util.helper.NetworkHelper;
 
+import com.github.lunatrius.ingameinfo.network.PacketHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -43,7 +44,7 @@ public class RemoteDataMessage implements IMessage {
                         data.setInteger("CurrentLP", soulNet.getCurrentEssence());
                         data.setInteger("OrbTier", soulNet.getOrbTier());
                         ResponseMessage response = new ResponseMessage(data);
-                        IGIBloodMagic.network.sendTo(response, player);
+                        PacketHandler.INSTANCE.sendTo(response, player);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
