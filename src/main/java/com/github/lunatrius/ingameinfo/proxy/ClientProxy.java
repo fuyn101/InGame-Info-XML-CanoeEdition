@@ -3,6 +3,7 @@ package com.github.lunatrius.ingameinfo.proxy;
 import com.github.lunatrius.ingameinfo.InGameInfoCore;
 import com.github.lunatrius.ingameinfo.command.InGameInfoCommand;
 import com.github.lunatrius.ingameinfo.compat.thaumcraft.TagThaumcraft;
+import com.github.lunatrius.ingameinfo.compat.toughasnails.TagTAN;
 import com.github.lunatrius.ingameinfo.handler.ConfigurationHandler;
 import com.github.lunatrius.ingameinfo.handler.KeyInputHandler;
 import com.github.lunatrius.ingameinfo.handler.Ticker;
@@ -54,10 +55,6 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void postInit(final FMLPostInitializationEvent event) {
         TagRegistry.INSTANCE.init();
-
-        if (Loader.isModLoaded("thaumcraft")) {
-            TagThaumcraft.register();
-        }
     }
 
     @Override
@@ -68,5 +65,15 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void serverStopping(final FMLServerStoppingEvent event) {
         Tag.setServer(null);
+    }
+
+    @Override
+    public void registerTAN() {
+        TagTAN.register();
+    }
+
+    @Override
+    public void registerThaumcraft() {
+        TagThaumcraft.register();
     }
 }

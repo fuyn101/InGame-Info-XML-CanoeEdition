@@ -28,4 +28,10 @@ public class CommonProxy {
 
     public void serverStopping(final FMLServerStoppingEvent event) {
     }
+
+    public void registerTAN() {
+    }
+
+    public void registerThaumcraft() {
+    }
 }

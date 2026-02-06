@@ -3,6 +3,7 @@ package com.github.lunatrius.ingameinfo;
 import com.github.lunatrius.ingameinfo.proxy.CommonProxy;
 import com.github.lunatrius.ingameinfo.reference.Reference;
 import com.github.lunatrius.ingameinfoxml.Tags;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -45,6 +46,14 @@ public class InGameInfoXML {
     @Mod.EventHandler
     public void postInit(final FMLPostInitializationEvent event) {
         proxy.postInit(event);
+
+        if (Loader.isModLoaded("thaumcraft")) {
+            proxy.registerThaumcraft();
+        }
+
+        if (Loader.isModLoaded("toughasnails")) {
+            proxy.registerTAN();
+        }
     }
 
     @Mod.EventHandler

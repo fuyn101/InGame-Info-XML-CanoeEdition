@@ -1,9 +1,9 @@
 package com.github.lunatrius.ingameinfo.compat.toughasnails;
 
+import com.github.lunatrius.ingameinfo.reference.Reference;
 import com.github.lunatrius.ingameinfo.tag.Tag;
 import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 import net.minecraft.client.resources.I18n;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import sereneseasons.api.season.ISeasonState;
 import sereneseasons.api.season.SeasonHelper;
 import toughasnails.api.TANCapabilities;
@@ -70,6 +70,6 @@ public abstract class TagTAN extends Tag
     }
 
     void log(Tag tag, Throwable ex) {
-        FMLCommonHandler.instance().getFMLLogger().warn(IGIToughAsNails.metadata.modId + ":" + tag.getName(), ex);
+        Reference.logger.warn(Reference.MODID + ":" + tag.getName(), ex);
     }
 }
