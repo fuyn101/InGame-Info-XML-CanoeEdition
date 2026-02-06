@@ -25,6 +25,10 @@ repositories {
             includeGroup 'maven.modrinth'
         }
     }
+    maven {
+        name 'BlameJared Maven'
+        url 'https://maven.blamejared.com'
+    }
     mavenLocal() // Must be last for caching to work
 }
 
@@ -45,9 +49,19 @@ dependencies {
     // By wrapping a dependency descriptor in rfg.deobf() method call, the dependency is queued for deobfuscation
     // When deobfuscating, RFG respects the mapping_channel + mapping_version stated in gradle.properties
 
+    compileOnly "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.711"
+    runtimeOnly "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.711"
     // Example - CurseMaven dependencies:
     // 'curse.maven:had-enough-items-557549:4543375' << had-enough-items = project slug, 557549 = project id, 4543375 = file id
     // Full documentation: https://cursemaven.com/
+    compileOnly "curse.maven:tough-as-nails-246391:2644652"
+    runtimeOnly "curse.maven:tough-as-nails-246391:2644652"
+
+    compileOnly "curse.maven:simpledifficulty-360779:3613814"
+    runtimeOnly "curse.maven:simpledifficulty-360779:3613814"
+
+    compileOnly "curse.maven:serene-seasons-291874:2799213"
+    runtimeOnly "curse.maven:serene-seasons-291874:2799213"
 
     // Example - Modrinth dependencies:
     // 'maven.modrinth:jei:4.16.1.1000' << jei = project name, 4.16.1.1000 = file version
