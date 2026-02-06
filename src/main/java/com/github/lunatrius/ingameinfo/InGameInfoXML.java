@@ -2,6 +2,7 @@ package com.github.lunatrius.ingameinfo;
 
 import com.github.lunatrius.ingameinfo.proxy.CommonProxy;
 import com.github.lunatrius.ingameinfo.reference.Reference;
+import com.github.lunatrius.ingameinfoxml.Tags;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -15,7 +16,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.Map;
 
-@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION, guiFactory = Reference.GUI_FACTORY)
+@Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION, guiFactory = Reference.GUI_FACTORY)
 public class InGameInfoXML {
     @Instance(Reference.MODID)
     public static InGameInfoXML instance;
