@@ -31,7 +31,7 @@ public abstract class TagBloodMagic extends Tag
                         PacketHandler.INSTANCE.sendToServer(new RemoteDataMessage());
                         lastRemoteUpdate = System.currentTimeMillis();
                     }
-                    return String.valueOf(cachedData.getInteger("CurrentLP"));
+                    return String.valueOf(cachedData.getTag("CurrentLP"));
                 } else if (player != null) {
                     return String.valueOf(NetworkHelper.getSoulNetwork(player).getCurrentEssence());
                 }
@@ -52,7 +52,7 @@ public abstract class TagBloodMagic extends Tag
                         PacketHandler.INSTANCE.sendToServer(new RemoteDataMessage());
                         lastRemoteUpdate = System.currentTimeMillis();
                     }
-                    return String.valueOf(cachedData.getInteger("OrbTier"));
+                    return String.valueOf(cachedData.getTag("OrbTier"));
                 } else if (player != null) {
                     return String.valueOf(NetworkHelper.getSoulNetwork(player).getOrbTier());
                 }
