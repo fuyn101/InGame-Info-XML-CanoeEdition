@@ -55,6 +55,14 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void postInit(final FMLPostInitializationEvent event) {
         TagRegistry.INSTANCE.init();
+
+        if (Loader.isModLoaded("thaumcraft")) {
+            TagThaumcraft.register();
+        }
+
+        if (Loader.isModLoaded("toughasnails")) {
+            TagTAN.register();
+        }
     }
 
     @Override
@@ -65,15 +73,5 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void serverStopping(final FMLServerStoppingEvent event) {
         Tag.setServer(null);
-    }
-
-    @Override
-    public void registerTAN() {
-        TagTAN.register();
-    }
-
-    @Override
-    public void registerThaumcraft() {
-        TagThaumcraft.register();
     }
 }

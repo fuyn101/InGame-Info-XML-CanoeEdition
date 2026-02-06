@@ -46,14 +46,6 @@ public class InGameInfoXML {
     @Mod.EventHandler
     public void postInit(final FMLPostInitializationEvent event) {
         proxy.postInit(event);
-
-        if (Loader.isModLoaded("thaumcraft")) {
-            proxy.registerThaumcraft();
-        }
-
-        if (Loader.isModLoaded("toughasnails")) {
-            proxy.registerTAN();
-        }
     }
 
     @Mod.EventHandler
