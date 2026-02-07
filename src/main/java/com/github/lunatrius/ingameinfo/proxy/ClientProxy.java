@@ -3,6 +3,7 @@ package com.github.lunatrius.ingameinfo.proxy;
 import com.github.lunatrius.ingameinfo.InGameInfoCore;
 import com.github.lunatrius.ingameinfo.command.InGameInfoCommand;
 import com.github.lunatrius.ingameinfo.compat.bloodmagic.TagBloodMagic;
+import com.github.lunatrius.ingameinfo.compat.rftools.TagRFTools;
 import com.github.lunatrius.ingameinfo.compat.thaumcraft.TagThaumcraft;
 import com.github.lunatrius.ingameinfo.compat.toughasnails.TagTAN;
 import com.github.lunatrius.ingameinfo.handler.ConfigurationHandler;
@@ -67,6 +68,10 @@ public class ClientProxy extends CommonProxy {
 
         if (Loader.isModLoaded("bloodmagic")) {
             TagBloodMagic.register();
+        }
+
+        if (Loader.isModLoaded("rftools")) {
+            TagRFTools.register();
         }
     }
 

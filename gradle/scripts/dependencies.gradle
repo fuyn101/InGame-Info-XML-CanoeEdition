@@ -69,6 +69,9 @@ dependencies {
     compileOnly "curse.maven:blood-magic-224791:2822288"
     runtimeOnly "curse.maven:blood-magic-224791:2822288"
 
+    compileOnly "curse.maven:mcjtylib-233105:2745846"
+    runtimeOnly "curse.maven:mcjtylib-233105:2745846"
+
     // Example - Modrinth dependencies:
     // 'maven.modrinth:jei:4.16.1.1000' << jei = project name, 4.16.1.1000 = file version
     // Full documentation: https://docs.modrinth.com/docs/tutorials/maven/

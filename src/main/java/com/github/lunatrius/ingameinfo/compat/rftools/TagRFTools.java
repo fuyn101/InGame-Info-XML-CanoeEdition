@@ -1,12 +1,12 @@
 package com.github.lunatrius.ingameinfo.compat.rftools;
 
 
+import com.github.lunatrius.ingameinfo.reference.Reference;
 import com.github.lunatrius.ingameinfo.tag.Tag;
 import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 import mcjty.rftoolsdim.dimensions.DimensionInformation;
 import mcjty.rftoolsdim.dimensions.DimensionStorage;
 import mcjty.rftoolsdim.dimensions.RfToolsDimensionManager;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public abstract class TagRFTools extends Tag
 {
@@ -19,9 +19,9 @@ public abstract class TagRFTools extends Tag
         @Override
         public String getValue() {
             try {
-                int id = player.world.provider.getDimension();
+                long id = player.world.provider.getDimension();
                 RfToolsDimensionManager dimensionManager = RfToolsDimensionManager.getDimensionManager(player.world);
-                DimensionInformation dimensionInformation = dimensionManager.getDimensionInformation(id);
+                DimensionInformation dimensionInformation = dimensionManager.getDimensionInformation((int) id);
                 return String.valueOf(dimensionInformation != null);
             } catch (Throwable e) {
                 log(this, e);
@@ -41,7 +41,7 @@ public abstract class TagRFTools extends Tag
                     return "N/A";
                 } else {
                     DimensionStorage storage = DimensionStorage.getDimensionStorage(player.getEntityWorld());
-                    int power = storage != null ? storage.getEnergyLevel(id) : 0;
+                    long power = storage != null ? storage.getEnergyLevel(id) : 0;
                     return String.valueOf(power);
                 }
             } catch (Throwable e) {
@@ -97,6 +97,6 @@ public abstract class TagRFTools extends Tag
     }
 
     public void log(Tag tag, Throwable ex) {
-        FMLCommonHandler.instance().getFMLLogger().warn(IGIRFTools.metadata.modId + ":" + tag.getName(), ex);
+        Reference.logger.warn(Reference.MODID + ":" + tag.getName(), ex);
     }
 }
