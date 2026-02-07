@@ -72,6 +72,7 @@ dependencies {
     compileOnly "curse.maven:mcjtylib-233105:2745846"
     runtimeOnly "curse.maven:mcjtylib-233105:2745846"
 
+    implementation rfg.deobf("curse.maven:lunatriuscorecanoeedition-1455344:7584047")
     // Example - Modrinth dependencies:
     // 'maven.modrinth:jei:4.16.1.1000' << jei = project name, 4.16.1.1000 = file version
     // Full documentation: https://docs.modrinth.com/docs/tutorials/maven/
