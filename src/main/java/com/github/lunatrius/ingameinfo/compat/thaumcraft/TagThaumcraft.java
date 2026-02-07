@@ -1,6 +1,6 @@
 package com.github.lunatrius.ingameinfo.compat.thaumcraft;
 
-import com.github.lunatrius.ingameinfo.compat.thaumcraft.network.RemoteDataMessage;
+import com.github.lunatrius.ingameinfo.compat.thaumcraft.tcnetwork.TCRemoteDataMessage;
 import com.github.lunatrius.ingameinfo.network.PacketHandler;
 import com.github.lunatrius.ingameinfo.reference.Reference;
 import com.github.lunatrius.ingameinfo.tag.Tag;
@@ -28,7 +28,7 @@ public abstract class TagThaumcraft extends Tag
                 if (world != null && world.isRemote) {
                     long delay = (System.currentTimeMillis() - lastRemoteUpdate);
                     if (delay > 500 || delay < 0) {
-                        PacketHandler.INSTANCE.sendToServer(new RemoteDataMessage());
+                        PacketHandler.INSTANCE.sendToServer(new TCRemoteDataMessage());
                         lastRemoteUpdate = System.currentTimeMillis();
                     }
                     return Float.toString(cachedData.getFloat("LocalVis"));
@@ -50,7 +50,7 @@ public abstract class TagThaumcraft extends Tag
                 if (world != null && world.isRemote) {
                     long delay = (System.currentTimeMillis() - lastRemoteUpdate);
                     if (delay > 500 || delay < 0) {
-                        PacketHandler.INSTANCE.sendToServer(new RemoteDataMessage());
+                        PacketHandler.INSTANCE.sendToServer(new TCRemoteDataMessage());
                         lastRemoteUpdate = System.currentTimeMillis();
                     }
                     return Float.toString(cachedData.getFloat("LocalFlux"));

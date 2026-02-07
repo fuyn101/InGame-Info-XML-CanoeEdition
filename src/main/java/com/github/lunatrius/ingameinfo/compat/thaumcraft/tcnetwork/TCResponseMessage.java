@@ -1,4 +1,4 @@
-package com.github.lunatrius.ingameinfo.compat.thaumcraft.network;
+package com.github.lunatrius.ingameinfo.compat.thaumcraft.tcnetwork;
 
 import com.github.lunatrius.ingameinfo.compat.thaumcraft.TagThaumcraft;
 import io.netty.buffer.ByteBuf;
@@ -9,14 +9,14 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class ResponseMessage implements IMessage {
+public class TCResponseMessage implements IMessage {
 
     public NBTTagCompound data;
 
-    public ResponseMessage() {
+    public TCResponseMessage() {
     }
 
-    public ResponseMessage(NBTTagCompound data) {
+    public TCResponseMessage(NBTTagCompound data) {
         this.data = data.copy();
     }
 
@@ -30,13 +30,13 @@ public class ResponseMessage implements IMessage {
         ByteBufUtils.writeTag(buf, data);
     }
 
-    public static class ResponseHandler implements IMessageHandler<ResponseMessage, IMessage> {
+    public static class ResponseHandler implements IMessageHandler<TCResponseMessage, IMessage> {
 
         public ResponseHandler() {
         }
 
         @Override
-        public IMessage onMessage(final ResponseMessage message, final MessageContext ctx) {
+        public IMessage onMessage(final TCResponseMessage message, final MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(new Runnable() {
                 @Override
                 public void run() {

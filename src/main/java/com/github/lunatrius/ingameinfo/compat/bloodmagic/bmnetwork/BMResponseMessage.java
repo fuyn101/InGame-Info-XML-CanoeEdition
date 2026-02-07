@@ -1,4 +1,4 @@
-package com.github.lunatrius.ingameinfo.compat.bloodmagic.network;
+package com.github.lunatrius.ingameinfo.compat.bloodmagic.bmnetwork;
 
 import com.github.lunatrius.ingameinfo.compat.bloodmagic.TagBloodMagic;
 import io.netty.buffer.ByteBuf;
@@ -8,14 +8,14 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class ResponseMessage implements IMessage {
+public class BMResponseMessage implements IMessage {
 
     public NBTTagCompound data;
 
-    public ResponseMessage() {
+    public BMResponseMessage() {
     }
 
-    public ResponseMessage(NBTTagCompound data) {
+    public BMResponseMessage(NBTTagCompound data) {
         this.data = data.copy();
     }
 
@@ -29,13 +29,13 @@ public class ResponseMessage implements IMessage {
         ByteBufUtils.writeTag(buf, data);
     }
 
-    public static class ResponseHandler implements IMessageHandler<ResponseMessage, IMessage> {
+    public static class ResponseHandler implements IMessageHandler<BMResponseMessage, IMessage> {
 
         public ResponseHandler() {
         }
 
         @Override
-        public IMessage onMessage(ResponseMessage message, final MessageContext ctx) {
+        public IMessage onMessage(BMResponseMessage message, final MessageContext ctx) {
             if (message.data.hasKey("OrbTier")) {
                 TagBloodMagic.cachedData = message.data.copy();
             }

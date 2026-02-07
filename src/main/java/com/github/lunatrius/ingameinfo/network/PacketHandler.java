@@ -1,5 +1,9 @@
 package com.github.lunatrius.ingameinfo.network;
 
+import com.github.lunatrius.ingameinfo.compat.bloodmagic.bmnetwork.BMRemoteDataMessage;
+import com.github.lunatrius.ingameinfo.compat.bloodmagic.bmnetwork.BMResponseMessage;
+import com.github.lunatrius.ingameinfo.compat.thaumcraft.tcnetwork.TCRemoteDataMessage;
+import com.github.lunatrius.ingameinfo.compat.thaumcraft.tcnetwork.TCResponseMessage;
 import com.github.lunatrius.ingameinfo.network.message.MessageSeed;
 import com.github.lunatrius.ingameinfo.reference.Reference;
 import net.minecraftforge.fml.common.Loader;
@@ -14,13 +18,13 @@ public class PacketHandler {
         INSTANCE.registerMessage(MessageSeed.class, MessageSeed.class, 0, Side.CLIENT);
 
         if (Loader.isModLoaded("thaumcraft")) {
-            INSTANCE.registerMessage(com.github.lunatrius.ingameinfo.compat.thaumcraft.network.ResponseMessage.ResponseHandler.class, com.github.lunatrius.ingameinfo.compat.thaumcraft.network.ResponseMessage.class, 1, Side.CLIENT);
-            INSTANCE.registerMessage(com.github.lunatrius.ingameinfo.compat.thaumcraft.network.RemoteDataMessage.Handler.class, com.github.lunatrius.ingameinfo.compat.thaumcraft.network.RemoteDataMessage.class, 2, Side.SERVER);
+            INSTANCE.registerMessage(TCResponseMessage.ResponseHandler.class, TCResponseMessage.class, 1, Side.CLIENT);
+            INSTANCE.registerMessage(TCRemoteDataMessage.Handler.class, TCRemoteDataMessage.class, 2, Side.SERVER);
         }
 
         if (Loader.isModLoaded("bloodmagic")) {
-            INSTANCE.registerMessage(com.github.lunatrius.ingameinfo.compat.bloodmagic.network.ResponseMessage.ResponseHandler.class, com.github.lunatrius.ingameinfo.compat.bloodmagic.network.ResponseMessage.class, 3, Side.CLIENT);
-            INSTANCE.registerMessage(com.github.lunatrius.ingameinfo.compat.bloodmagic.network.RemoteDataMessage.Handler.class, com.github.lunatrius.ingameinfo.compat.bloodmagic.network.RemoteDataMessage.class, 4, Side.SERVER);
+            INSTANCE.registerMessage(BMResponseMessage.ResponseHandler.class, BMResponseMessage.class, 3, Side.CLIENT);
+            INSTANCE.registerMessage(BMRemoteDataMessage.Handler.class, BMRemoteDataMessage.class, 4, Side.SERVER);
         }
     }
 }

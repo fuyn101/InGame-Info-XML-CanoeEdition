@@ -1,7 +1,7 @@
 package com.github.lunatrius.ingameinfo.compat.bloodmagic;
 
 import WayofTime.bloodmagic.util.helper.NetworkHelper;
-import com.github.lunatrius.ingameinfo.compat.bloodmagic.network.RemoteDataMessage;
+import com.github.lunatrius.ingameinfo.compat.bloodmagic.bmnetwork.BMRemoteDataMessage;
 import com.github.lunatrius.ingameinfo.network.PacketHandler;
 import com.github.lunatrius.ingameinfo.reference.Reference;
 import com.github.lunatrius.ingameinfo.tag.Tag;
@@ -28,7 +28,7 @@ public abstract class TagBloodMagic extends Tag
                 if (world != null && world.isRemote) {
                     long delay = (System.currentTimeMillis() - lastRemoteUpdate);
                     if (delay > 500 || delay < 0) {
-                        PacketHandler.INSTANCE.sendToServer(new RemoteDataMessage());
+                        PacketHandler.INSTANCE.sendToServer(new BMRemoteDataMessage());
                         lastRemoteUpdate = System.currentTimeMillis();
                     }
                     return String.valueOf(cachedData.getTag("CurrentLP"));
@@ -49,7 +49,7 @@ public abstract class TagBloodMagic extends Tag
                 if (world != null && world.isRemote) {
                     long delay = (System.currentTimeMillis() - lastRemoteUpdate);
                     if (delay > 500 || delay < 0) {
-                        PacketHandler.INSTANCE.sendToServer(new RemoteDataMessage());
+                        PacketHandler.INSTANCE.sendToServer(new BMRemoteDataMessage());
                         lastRemoteUpdate = System.currentTimeMillis();
                     }
                     return String.valueOf(cachedData.getTag("OrbTier"));

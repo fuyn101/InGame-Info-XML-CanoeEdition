@@ -1,4 +1,7 @@
-package com.github.lunatrius.ingameinfo.compat.thaumcraft.network;
+package com.github.lunatrius.ingameinfo.compat.bloodmagic.bmnetwork;
+
+import WayofTime.bloodmagic.core.data.SoulNetwork;
+import WayofTime.bloodmagic.util.helper.NetworkHelper;
 
 import com.github.lunatrius.ingameinfo.network.PacketHandler;
 import io.netty.buffer.ByteBuf;
@@ -9,11 +12,10 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import thaumcraft.api.aura.AuraHelper;
 
-public class RemoteDataMessage implements IMessage {
+public class BMRemoteDataMessage implements IMessage {
 
-    public RemoteDataMessage() {
+    public BMRemoteDataMessage() {
     }
 
     @Override
@@ -24,13 +26,13 @@ public class RemoteDataMessage implements IMessage {
     public void toBytes(ByteBuf buf) {
     }
 
-    public static class Handler implements IMessageHandler<RemoteDataMessage, ResponseMessage> {
+    public static class Handler implements IMessageHandler<BMRemoteDataMessage, BMResponseMessage> {
 
         public Handler() {
         }
 
         @Override
-        public ResponseMessage onMessage(RemoteDataMessage message, MessageContext ctx) {
+        public BMResponseMessage onMessage(BMRemoteDataMessage message, MessageContext ctx) {
             final NBTTagCompound data = new NBTTagCompound();
             final EntityPlayerMP player = ctx.getServerHandler().player;
             IThreadListener mainThread = (WorldServer) player.world;
@@ -38,9 +40,10 @@ public class RemoteDataMessage implements IMessage {
                 @Override
                 public void run() {
                     try {
-                        data.setFloat("LocalVis", AuraHelper.getVis(player.world, player.getPosition()));
-                        data.setFloat("LocalFlux", AuraHelper.getFlux(player.world, player.getPosition()));
-                        ResponseMessage response = new ResponseMessage(data);
+                        SoulNetwork soulNet = NetworkHelper.getSoulNetwork(player);
+                        data.setInteger("CurrentLP", soulNet.getCurrentEssence());
+                        data.setInteger("OrbTier", soulNet.getOrbTier());
+                        BMResponseMessage response = new BMResponseMessage(data);
                         PacketHandler.INSTANCE.sendTo(response, player);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -50,4 +53,5 @@ public class RemoteDataMessage implements IMessage {
             return null;
         }
     }
+
 }
