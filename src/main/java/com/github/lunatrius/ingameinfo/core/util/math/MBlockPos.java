@@ -161,7 +161,7 @@ public class MBlockPos extends BlockPos {
 
     @Override
     public MBlockPos offset(final EnumFacing facing, final int n) {
-        return new MBlockPos(this.x + facing.getFrontOffsetX() * n, this.y + facing.getFrontOffsetY() * n, this.z + facing.getFrontOffsetZ() * n);
+        return new MBlockPos(this.x + facing.getXOffset() * n, this.y + facing.getYOffset() * n, this.z + facing.getZOffset() * n);
     }
 
     @Override
