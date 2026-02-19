@@ -183,14 +183,14 @@ public class GuiEditorMain extends GuiScreen {
         int controlsY = viewportY + viewportHeight + 30;
 
         String[] controls = {
-            "Click: Select element",
-            "Drag: Move element",
-            "Tab: Cycle selection",
-            "Arrows: Nudge position",
-            "G: Toggle grid",
-            "Ctrl+Drag: Snap to grid",
-            "Ctrl+S: Save",
-            "Ctrl+R: Reload"
+            new TextComponentTranslation(Names.Editor.CONTROL_CLICK).getFormattedText(),
+            new TextComponentTranslation(Names.Editor.CONTROL_DRAG).getFormattedText(),
+            new TextComponentTranslation(Names.Editor.CONTROL_TAB).getFormattedText(),
+            new TextComponentTranslation(Names.Editor.CONTROL_ARROWS).getFormattedText(),
+            new TextComponentTranslation(Names.Editor.CONTROL_G).getFormattedText(),
+            new TextComponentTranslation(Names.Editor.CONTROL_CTRLSNAP).getFormattedText(),
+            new TextComponentTranslation(Names.Editor.CONTROL_CTRLS).getFormattedText(),
+            new TextComponentTranslation(Names.Editor.CONTROL_CTRLR).getFormattedText()
         };
 
         for (int i = 0; i < controls.length; i++) {
@@ -308,8 +308,13 @@ public class GuiEditorMain extends GuiScreen {
     }
 
     private void updateButtonStates() {
-        btnGrid.displayString = editorState.isShowGrid() ? "Grid: ON" : "Grid: OFF";
-        btnSnap.displayString = editorState.isSnapToGrid() ? "Snap: ON" : "Snap: OFF";
+        String gridText = new TextComponentTranslation(Names.Editor.GRID).getFormattedText();
+        String snapText = new TextComponentTranslation(Names.Editor.SNAP).getFormattedText();
+        String onText = ": ON";
+        String offText = ": OFF";
+        
+        btnGrid.displayString = gridText + (editorState.isShowGrid() ? onText : offText);
+        btnSnap.displayString = snapText + (editorState.isSnapToGrid() ? onText : offText);
         btnPosition.enabled = editorState.getSelectedElement() != null;
         btnReset.enabled = editorState.getSelectedElement() != null;
     }
