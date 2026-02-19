@@ -17,9 +17,14 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.text.TextComponentTranslation;
 
 public class GuiEditorMain extends GuiScreen {
-    private static final int BUTTON_WIDTH = 80;
+    private static final int BUTTON_WIDTH = 90;
     private static final int BUTTON_HEIGHT = 20;
     private static final int BUTTON_SPACING = 5;
+    private static final int MARGIN = 10;
+    private static final int SIDEBAR_WIDTH = 100;
+    private static final int TITLE_HEIGHT = 30;
+    private static final int INFO_HEIGHT = 80;
+    private static final int CONTROLS_HEIGHT = 100;
 
     private final GuiScreen parentScreen;
     private final EditorState editorState;
@@ -41,6 +46,10 @@ public class GuiEditorMain extends GuiScreen {
     private int viewportWidth = 0;
     private int viewportHeight = 0;
 
+    private float scaleFactor = 1.0f;
+    private int offsetX = 0;
+    private int offsetY = 0;
+
     public GuiEditorMain(GuiScreen parentScreen) {
         this.parentScreen = parentScreen;
         this.editorState = new EditorState();
@@ -49,14 +58,21 @@ public class GuiEditorMain extends GuiScreen {
     @Override
     public void initGui() {
         ScaledResolution resolution = new ScaledResolution(mc);
+        int screenWidth = resolution.getScaledWidth();
+        int screenHeight = resolution.getScaledHeight();
 
-        viewportWidth = resolution.getScaledWidth() - 220;
-        viewportHeight = resolution.getScaledHeight() - 60;
-        viewportX = 20;
-        viewportY = 40;
+        int availableWidth = screenWidth - MARGIN * 2 - SIDEBAR_WIDTH;
+        int availableHeight = screenHeight - TITLE_HEIGHT - INFO_HEIGHT - CONTROLS_HEIGHT - MARGIN * 2;
 
-        int buttonX = resolution.getScaledWidth() - 190;
-        int buttonY = 50;
+        viewportWidth = availableWidth;
+        viewportHeight = availableHeight;
+        viewportX = MARGIN;
+        viewportY = TITLE_HEIGHT;
+
+        calculateScaleFactor();
+
+        int buttonX = screenWidth - SIDEBAR_WIDTH - MARGIN - BUTTON_WIDTH;
+        int buttonY = TITLE_HEIGHT + MARGIN;
 
         btnSave = new GuiButton(0, buttonX, buttonY, BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponentTranslation(Names.Editor.SAVE).getFormattedText());
         btnReload = new GuiButton(1, buttonX, buttonY + (BUTTON_HEIGHT + BUTTON_SPACING) * 1, BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponentTranslation(Names.Editor.RELOAD).getFormattedText());
@@ -75,6 +91,43 @@ public class GuiEditorMain extends GuiScreen {
         buttonList.add(btnAlignment);
 
         updateButtonStates();
+    }
+
+    private void calculateScaleFactor() {
+        ScaledResolution resolution = new ScaledResolution(mc);
+        int gameWidth = resolution.getScaledWidth();
+        int gameHeight = resolution.getScaledHeight();
+
+        float scaleX = (float) viewportWidth / gameWidth;
+        float scaleY = (float) viewportHeight / gameHeight;
+        scaleFactor = Math.min(scaleX, scaleY);
+
+        if (scaleFactor > 1.0f) {
+            scaleFactor = 1.0f;
+        }
+
+        offsetX = (int) ((viewportWidth - gameWidth * scaleFactor) / 2);
+        offsetY = (int) ((viewportHeight - gameHeight * scaleFactor) / 2);
+    }
+
+    private Point screenToViewport(int mouseX, int mouseY) {
+        int x = (int) ((mouseX - viewportX - offsetX) / scaleFactor);
+        int y = (int) ((mouseY - viewportY - offsetY) / scaleFactor);
+        return new Point(x, y);
+    }
+
+    private Point viewportToScreen(int x, int y) {
+        int screenX = (int) (x * scaleFactor + viewportX + offsetX);
+        int screenY = (int) (y * scaleFactor + viewportY + offsetY);
+        return new Point(screenX, screenY);
+    }
+
+    private Rect scaleRect(Rect rect) {
+        int x = (int) (rect.getX() * scaleFactor + offsetX);
+        int y = (int) (rect.getY() * scaleFactor + offsetY);
+        int w = (int) (rect.getWidth() * scaleFactor);
+        int h = (int) (rect.getHeight() * scaleFactor);
+        return new Rect(x, y, w, h);
     }
 
     @Override
@@ -135,9 +188,12 @@ public class GuiEditorMain extends GuiScreen {
 
     private void drawElements(int mouseX, int mouseY) {
         for (EditorElement element : editorState.getElements()) {
-            element.setHovered(element.containsPoint(mouseX, mouseY));
+            if (element.isChild()) continue;
+            
+            Point viewportMouse = screenToViewport(mouseX, mouseY);
+            element.setHovered(element.containsPoint(viewportMouse.getX(), viewportMouse.getY()));
 
-            Rect bounds = element.getAbsoluteBounds();
+            Rect bounds = scaleRect(element.getAbsoluteBounds());
 
             if (element.isSelected()) {
                 RenderUtil.drawFilledRect(bounds, new Color(0, 255, 0, 32), Color.GREEN);
@@ -149,8 +205,36 @@ public class GuiEditorMain extends GuiScreen {
 
             String text = element.getDisplayText();
             if (!text.isEmpty()) {
-                RenderUtil.drawString(text, new Point(bounds.getX() + 2, bounds.getY() + 2), Color.WHITE);
+                Point textPos = viewportToScreen(element.getX(), element.getY());
+                RenderUtil.drawString(text, new Point(textPos.getX() + 2, textPos.getY() + 2), Color.WHITE);
             }
+            
+            drawChildElements(element, mouseX, mouseY);
+        }
+    }
+
+    private void drawChildElements(EditorElement parent, int mouseX, int mouseY) {
+        for (EditorElement child : parent.getChildren()) {
+            Point viewportMouse = screenToViewport(mouseX, mouseY);
+            child.setHovered(child.containsPoint(viewportMouse.getX(), viewportMouse.getY()));
+
+            Rect bounds = scaleRect(child.getAbsoluteBounds());
+
+            if (child.isSelected()) {
+                RenderUtil.drawFilledRect(bounds, new Color(0, 255, 0, 48), Color.GREEN);
+            } else if (child.isHovered()) {
+                RenderUtil.drawFilledRect(bounds, new Color(255, 255, 0, 48), Color.YELLOW);
+            } else {
+                RenderUtil.drawRect(bounds, new Color(255, 255, 255, 32));
+            }
+
+            String text = child.getDisplayText();
+            if (!text.isEmpty()) {
+                Point textPos = viewportToScreen(child.getX(), child.getY());
+                RenderUtil.drawString(text, new Point(textPos.getX() + 2, textPos.getY() + 2), Color.WHITE);
+            }
+            
+            drawChildElements(child, mouseX, mouseY);
         }
     }
 
@@ -158,7 +242,9 @@ public class GuiEditorMain extends GuiScreen {
         if (!editorState.isShowGrid()) return;
 
         Rect viewport = new Rect(viewportX, viewportY, viewportWidth, viewportHeight);
-        RenderUtil.drawGrid(viewport, editorState.getGridSize(), new Color(128, 128, 128, 64));
+        int scaledGridSize = (int) (editorState.getGridSize() * scaleFactor);
+        if (scaledGridSize < 5) scaledGridSize = 5;
+        RenderUtil.drawGrid(viewport, scaledGridSize, new Color(128, 128, 128, 64));
     }
 
     private void drawSelectedElementInfo() {
@@ -169,8 +255,9 @@ public class GuiEditorMain extends GuiScreen {
         int infoY = viewportY + viewportHeight + 10;
 
         String selectedText = new TextComponentTranslation(Names.Editor.SELECTED).getFormattedText();
-        String infoText = String.format("%s: (%d, %d) [%dx%d]", 
-            selectedText, selected.getX(), selected.getY(), selected.getWidth(), selected.getHeight());
+        String typeText = selected.isChild() ? " (Child)" : " (Parent)";
+        String infoText = String.format("%s%s: (%d, %d) [%dx%d]", 
+            selectedText, typeText, selected.getX(), selected.getY(), selected.getWidth(), selected.getHeight());
         fontRenderer.drawString(infoText, infoX, infoY, Color.CYAN.getPacked());
 
         String alignmentText = new TextComponentTranslation(Names.Editor.ALIGNMENT).getFormattedText();
@@ -203,15 +290,16 @@ public class GuiEditorMain extends GuiScreen {
         super.mouseClicked(mouseX, mouseY, mouseButton);
 
         if (isInViewport(mouseX, mouseY)) {
-            EditorElement element = editorState.getElementAtPoint(mouseX, mouseY);
+            Point viewportMouse = screenToViewport(mouseX, mouseY);
+            EditorElement element = editorState.getElementAtPoint(viewportMouse.getX(), viewportMouse.getY());
 
             if (element != null) {
                 editorState.setSelectedElement(element);
                 if (mouseButton == 0) {
-                    element.startDrag(mouseX, mouseY);
+                    element.startDrag(viewportMouse.getX(), viewportMouse.getY());
                     isDragging = true;
-                    dragStartX = mouseX;
-                    dragStartY = mouseY;
+                    dragStartX = viewportMouse.getX();
+                    dragStartY = viewportMouse.getY();
                 }
             } else {
                 editorState.clearSelection();
@@ -227,8 +315,11 @@ public class GuiEditorMain extends GuiScreen {
         if (isDragging && isInViewport(mouseX, mouseY)) {
             EditorElement selected = editorState.getSelectedElement();
             if (selected != null) {
+                Point viewportMouse = screenToViewport(mouseX, mouseY);
                 boolean snap = editorState.isSnapToGrid() || isCtrlKeyDown();
-                selected.updateDrag(mouseX, mouseY, snap, editorState.getGridSize());
+                int scaledGridSize = (int) (editorState.getGridSize() / scaleFactor);
+                if (scaledGridSize < 1) scaledGridSize = 1;
+                selected.updateDrag(viewportMouse.getX(), viewportMouse.getY(), snap, scaledGridSize);
             }
         }
     }
@@ -281,14 +372,17 @@ public class GuiEditorMain extends GuiScreen {
         }
 
         int moveAmount = isShiftKeyDown() ? 10 : 1;
+        int scaledMoveAmount = (int) (moveAmount / scaleFactor);
+        if (scaledMoveAmount < 1) scaledMoveAmount = 1;
+        
         if (keyCode == 200) {
-            editorState.moveSelectedElement(0, -moveAmount);
+            editorState.moveSelectedElement(0, -scaledMoveAmount);
         } else if (keyCode == 208) {
-            editorState.moveSelectedElement(0, moveAmount);
+            editorState.moveSelectedElement(0, scaledMoveAmount);
         } else if (keyCode == 203) {
-            editorState.moveSelectedElement(-moveAmount, 0);
+            editorState.moveSelectedElement(-scaledMoveAmount, 0);
         } else if (keyCode == 205) {
-            editorState.moveSelectedElement(moveAmount, 0);
+            editorState.moveSelectedElement(scaledMoveAmount, 0);
         }
 
         super.keyTyped(typedChar, keyCode);

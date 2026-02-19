@@ -5,9 +5,13 @@ import com.github.lunatrius.ingameinfo.client.gui.overlay.Info;
 import com.github.lunatrius.ingameinfo.editor.geom.Point;
 import com.github.lunatrius.ingameinfo.editor.geom.Rect;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EditorElement {
     private final Info info;
     private final Alignment alignment;
+    private final List<EditorElement> children = new ArrayList<EditorElement>();
 
     private int x;
     private int y;
@@ -78,6 +82,18 @@ public class EditorElement {
         return new Rect(absX, absY, width, height);
     }
 
+    public boolean isChild() {
+        return info.offsetX != 0 || info.offsetY != 0;
+    }
+
+    public List<EditorElement> getChildren() {
+        return children;
+    }
+
+    public void addChild(EditorElement child) {
+        children.add(child);
+    }
+
     public boolean isSelected() {
         return selected;
     }
@@ -136,11 +152,16 @@ public class EditorElement {
     }
 
     public void applyPosition() {
-        this.info.x = this.x;
-        this.info.y = this.y;
-        if (alignment != null) {
-            alignment.x = this.x;
-            alignment.y = this.y;
+        if (isChild()) {
+            this.info.x = this.x;
+            this.info.y = this.y;
+        } else {
+            this.info.x = this.x;
+            this.info.y = this.y;
+            if (alignment != null) {
+                alignment.x = this.x;
+                alignment.y = this.y;
+            }
         }
     }
 
