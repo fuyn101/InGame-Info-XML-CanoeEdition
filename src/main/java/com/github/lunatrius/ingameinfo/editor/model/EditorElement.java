@@ -152,16 +152,13 @@ public class EditorElement {
     }
 
     public void applyPosition() {
-        if (isChild()) {
-            this.info.x = this.x;
-            this.info.y = this.y;
-        } else {
-            this.info.x = this.x;
-            this.info.y = this.y;
-            if (alignment != null) {
-                alignment.x = this.x;
-                alignment.y = this.y;
-            }
+        if (alignment != null) {
+            ScaledResolution resolution = new ScaledResolution(Minecraft.getMinecraft());
+            int screenWidth = resolution.getScaledWidth();
+            int screenHeight = resolution.getScaledHeight();
+            
+            alignment.x = this.x - alignment.getOffsetX(screenWidth, width);
+            alignment.y = this.y - alignment.getOffsetY(screenHeight, height);
         }
     }
 
