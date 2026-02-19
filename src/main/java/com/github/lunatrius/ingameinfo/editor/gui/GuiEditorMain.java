@@ -58,13 +58,13 @@ public class GuiEditorMain extends GuiScreen {
         int buttonX = resolution.getScaledWidth() - 190;
         int buttonY = 50;
 
-        btnSave = new GuiButton(0, buttonX, buttonY, BUTTON_WIDTH, BUTTON_HEIGHT, "Save");
-        btnReload = new GuiButton(1, buttonX, buttonY + (BUTTON_HEIGHT + BUTTON_SPACING) * 1, BUTTON_WIDTH, BUTTON_HEIGHT, "Reload");
-        btnReset = new GuiButton(2, buttonX, buttonY + (BUTTON_HEIGHT + BUTTON_SPACING) * 2, BUTTON_WIDTH, BUTTON_HEIGHT, "Reset");
-        btnGrid = new GuiButton(3, buttonX, buttonY + (BUTTON_HEIGHT + BUTTON_SPACING) * 3, BUTTON_WIDTH, BUTTON_HEIGHT, "Grid");
-        btnSnap = new GuiButton(4, buttonX, buttonY + (BUTTON_HEIGHT + BUTTON_SPACING) * 4, BUTTON_WIDTH, BUTTON_HEIGHT, "Snap");
-        btnPosition = new GuiButton(5, buttonX, buttonY + (BUTTON_HEIGHT + BUTTON_SPACING) * 5, BUTTON_WIDTH, BUTTON_HEIGHT, "Position");
-        btnAlignment = new GuiButton(6, buttonX, buttonY + (BUTTON_HEIGHT + BUTTON_SPACING) * 6, BUTTON_WIDTH, BUTTON_HEIGHT, "Alignment");
+        btnSave = new GuiButton(0, buttonX, buttonY, BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponentTranslation(Names.Editor.SAVE).getFormattedText());
+        btnReload = new GuiButton(1, buttonX, buttonY + (BUTTON_HEIGHT + BUTTON_SPACING) * 1, BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponentTranslation(Names.Editor.RELOAD).getFormattedText());
+        btnReset = new GuiButton(2, buttonX, buttonY + (BUTTON_HEIGHT + BUTTON_SPACING) * 2, BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponentTranslation(Names.Editor.RESET).getFormattedText());
+        btnGrid = new GuiButton(3, buttonX, buttonY + (BUTTON_HEIGHT + BUTTON_SPACING) * 3, BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponentTranslation(Names.Editor.GRID).getFormattedText());
+        btnSnap = new GuiButton(4, buttonX, buttonY + (BUTTON_HEIGHT + BUTTON_SPACING) * 4, BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponentTranslation(Names.Editor.SNAP).getFormattedText());
+        btnPosition = new GuiButton(5, buttonX, buttonY + (BUTTON_HEIGHT + BUTTON_SPACING) * 5, BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponentTranslation(Names.Editor.POSITION).getFormattedText());
+        btnAlignment = new GuiButton(6, buttonX, buttonY + (BUTTON_HEIGHT + BUTTON_SPACING) * 6, BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponentTranslation(Names.Editor.ALIGNMENT).getFormattedText());
 
         buttonList.add(btnSave);
         buttonList.add(btnReload);
@@ -116,14 +116,14 @@ public class GuiEditorMain extends GuiScreen {
     }
 
     private void drawTitle() {
-        String title = "InGame Info XML Editor";
+        String title = new TextComponentTranslation(Names.Editor.TITLE).getFormattedText();
         drawCenteredString(fontRenderer, title, width / 2, 10, Color.WHITE.getPacked());
 
-        String configName = "Config: " + InGameInfoCore.INSTANCE.getConfigName();
+        String configName = new TextComponentTranslation(Names.Editor.CONFIG, InGameInfoCore.INSTANCE.getConfigName()).getFormattedText();
         fontRenderer.drawString(configName, 20, 25, Color.GRAY.getPacked());
 
         if (editorState.hasUnsavedChanges()) {
-            String unsaved = "* Unsaved changes";
+            String unsaved = new TextComponentTranslation(Names.Editor.UNSAVED).getFormattedText();
             fontRenderer.drawString(unsaved, width - fontRenderer.getStringWidth(unsaved) - 20, 25, Color.YELLOW.getPacked());
         }
     }
@@ -168,12 +168,14 @@ public class GuiEditorMain extends GuiScreen {
         int infoX = viewportX;
         int infoY = viewportY + viewportHeight + 10;
 
-        String infoText = String.format("Selected: (%d, %d) [%dx%d]", 
-            selected.getX(), selected.getY(), selected.getWidth(), selected.getHeight());
+        String selectedText = new TextComponentTranslation(Names.Editor.SELECTED).getFormattedText();
+        String infoText = String.format("%s: (%d, %d) [%dx%d]", 
+            selectedText, selected.getX(), selected.getY(), selected.getWidth(), selected.getHeight());
         fontRenderer.drawString(infoText, infoX, infoY, Color.CYAN.getPacked());
 
-        String alignmentText = "Alignment: " + (selected.getAlignment() != null ? selected.getAlignment().toString() : "None");
-        fontRenderer.drawString(alignmentText, infoX, infoY + 12, Color.CYAN.getPacked());
+        String alignmentText = new TextComponentTranslation(Names.Editor.ALIGNMENT).getFormattedText();
+        String alignmentValue = selected.getAlignment() != null ? selected.getAlignment().toString() : new TextComponentTranslation(Names.Editor.ALIGNMENT_NONE).getFormattedText();
+        fontRenderer.drawString(alignmentText + ": " + alignmentValue, infoX, infoY + 12, Color.CYAN.getPacked());
     }
 
     private void drawControls() {
