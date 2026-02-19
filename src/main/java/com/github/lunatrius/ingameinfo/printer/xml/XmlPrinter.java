@@ -55,8 +55,6 @@ public class XmlPrinter implements IPrinter {
             if (lists != null) {
                 final Element elementLines = doc.createElement("lines");
                 elementLines.setAttribute("at", alignment.toString().toLowerCase(Locale.ENGLISH));
-                elementLines.setAttribute("x", String.valueOf(alignment.x));
-                elementLines.setAttribute("y", String.valueOf(alignment.y));
 
                 appendLine(doc, elementLines, lists);
 

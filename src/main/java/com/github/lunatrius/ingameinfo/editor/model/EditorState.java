@@ -28,20 +28,6 @@ public class EditorState {
             Alignment alignment = findAlignmentForInfo(info);
             EditorElement element = new EditorElement(info, alignment);
             elements.add(element);
-            
-            loadChildElements(element, info, alignment);
-        }
-    }
-
-    private void loadChildElements(EditorElement parentElement, Info parentInfo, Alignment alignment) {
-        if (parentInfo.children != null && !parentInfo.children.isEmpty()) {
-            for (Info childInfo : parentInfo.children) {
-                EditorElement childElement = new EditorElement(childInfo, alignment);
-                parentElement.addChild(childElement);
-                elements.add(childElement);
-                
-                loadChildElements(childElement, childInfo, alignment);
-            }
         }
     }
 
@@ -78,15 +64,6 @@ public class EditorState {
     }
 
     public EditorElement getElementAtPoint(int mouseX, int mouseY) {
-        for (int i = elements.size() - 1; i >= 0; i--) {
-            EditorElement element = elements.get(i);
-            if (element.containsPoint(mouseX, mouseY)) {
-                if (element.isChild()) {
-                    return element;
-                }
-            }
-        }
-        
         for (int i = elements.size() - 1; i >= 0; i--) {
             EditorElement element = elements.get(i);
             if (element.containsPoint(mouseX, mouseY)) {

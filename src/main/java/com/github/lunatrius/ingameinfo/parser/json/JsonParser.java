@@ -47,21 +47,7 @@ public class JsonParser implements IParser {
         for (final Map.Entry<String, JsonElement> entry : entries) {
             final Alignment alignment = Alignment.parse(entry.getKey());
             if (alignment != null) {
-                final JsonElement value = entry.getValue();
-                if (value.isJsonObject()) {
-                    final JsonObject alignmentObj = value.getAsJsonObject();
-                    if (alignmentObj.has("x")) {
-                        alignment.x = alignmentObj.get("x").getAsInt();
-                    }
-                    if (alignmentObj.has("y")) {
-                        alignment.y = alignmentObj.get("y").getAsInt();
-                    }
-                    if (alignmentObj.has("lines")) {
-                        format.put(alignment, getLines(alignmentObj.get("lines")));
-                    }
-                } else if (value.isJsonArray()) {
-                    format.put(alignment, getLines(value));
-                }
+                format.put(alignment, getLines(entry.getValue()));
             }
         }
 

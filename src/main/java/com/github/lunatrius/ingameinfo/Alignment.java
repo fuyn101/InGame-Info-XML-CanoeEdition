@@ -81,21 +81,6 @@ public enum Alignment {
         return 0;
     }
 
-    public int getOffsetX(final int screenwidth, final int textwidth) {
-        switch (this.alignment & MASK_X) {
-        case LEFT:
-            return 0;
-
-        case CENTER:
-            return (screenwidth - textwidth) / 2;
-
-        case RIGHT:
-            return screenwidth - textwidth;
-        }
-
-        return 0;
-    }
-
     public int getY(final int screenheight, final int textheight) {
         switch (this.alignment & MASK_Y) {
         case TOP:
@@ -106,21 +91,6 @@ public enum Alignment {
 
         case BOTTOM:
             return this.y + screenheight - textheight;
-        }
-
-        return 0;
-    }
-
-    public int getOffsetY(final int screenheight, final int textheight) {
-        switch (this.alignment & MASK_Y) {
-        case TOP:
-            return 0;
-
-        case MIDDLE:
-            return (screenheight - textheight) / 2;
-
-        case BOTTOM:
-            return screenheight - textheight;
         }
 
         return 0;

@@ -47,14 +47,6 @@ public class XmlParser implements IParser {
             if (elementLines != null) {
                 final Alignment alignment = Alignment.parse(elementLines.getAttribute("at"));
                 if (alignment != null) {
-                    final String xAttr = elementLines.getAttribute("x");
-                    final String yAttr = elementLines.getAttribute("y");
-                    if (!xAttr.isEmpty()) {
-                        alignment.x = Integer.parseInt(xAttr);
-                    }
-                    if (!yAttr.isEmpty()) {
-                        alignment.y = Integer.parseInt(yAttr);
-                    }
                     format.put(alignment, getLines(elementLines));
                 }
             }

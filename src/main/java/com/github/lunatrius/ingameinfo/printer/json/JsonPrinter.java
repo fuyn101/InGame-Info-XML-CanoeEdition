@@ -44,16 +44,12 @@ public class JsonPrinter implements IPrinter {
         for (final Alignment alignment : Alignment.values()) {
             final List<List<Value>> lists = format.get(alignment);
             if (lists != null) {
-                final JsonObject alignmentObj = new JsonObject();
-                alignmentObj.addProperty("x", alignment.x);
-                alignmentObj.addProperty("y", alignment.y);
-                
                 final JsonArray arrayLines = new JsonArray();
+
                 appendLine(arrayLines, lists);
-                
+
                 if (arrayLines.size() > 0) {
-                    alignmentObj.add("lines", arrayLines);
-                    jsonConfig.add(alignment.toString().toLowerCase(Locale.ENGLISH), alignmentObj);
+                    jsonConfig.add(alignment.toString().toLowerCase(Locale.ENGLISH), arrayLines);
                 }
             }
         }
