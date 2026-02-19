@@ -2,6 +2,7 @@ package com.github.lunatrius.ingameinfo.editor.gui;
 
 import java.io.IOException;
 
+import com.github.lunatrius.ingameinfo.Alignment;
 import com.github.lunatrius.ingameinfo.InGameInfoCore;
 import com.github.lunatrius.ingameinfo.editor.model.EditorElement;
 import com.github.lunatrius.ingameinfo.editor.model.EditorState;
@@ -9,6 +10,7 @@ import com.github.lunatrius.ingameinfo.editor.geom.Point;
 import com.github.lunatrius.ingameinfo.editor.geom.Rect;
 import com.github.lunatrius.ingameinfo.editor.render.Color;
 import com.github.lunatrius.ingameinfo.editor.render.RenderUtil;
+import com.github.lunatrius.ingameinfo.handler.ConfigurationHandler;
 import com.github.lunatrius.ingameinfo.reference.Names;
 
 import net.minecraft.client.gui.GuiButton;
@@ -301,9 +303,17 @@ public class GuiEditorMain extends GuiScreen {
 
     public void saveConfig() {
         String configName = InGameInfoCore.INSTANCE.getConfigName();
+        
+        for (Alignment alignment : Alignment.values()) {
+            if (ConfigurationHandler.propAlignments.containsKey(alignment)) {
+                ConfigurationHandler.propAlignments.get(alignment).set(alignment.getXY());
+            }
+        }
+        
         if (InGameInfoCore.INSTANCE.saveConfig(configName)) {
             editorState.applyAllChanges();
             editorState.setHasUnsavedChanges(false);
+            ConfigurationHandler.save();
         }
     }
 
