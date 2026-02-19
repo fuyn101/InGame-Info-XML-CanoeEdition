@@ -9,7 +9,6 @@ import com.github.lunatrius.ingameinfo.handler.ConfigurationHandler;
 import com.github.lunatrius.ingameinfo.handler.Ticker;
 import com.github.lunatrius.ingameinfo.reference.Names;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -113,10 +112,10 @@ public class InGameInfoCommand extends CommandBase {
                 DelayedGuiDisplayTicker.create(new GuiTags(), 10);
                 return;
             } else if (args[0].equalsIgnoreCase(Names.Command.EDIT)) {
-                Minecraft.getMinecraft().displayGuiScreen(new GuiEditorMain(null));
+                DelayedGuiDisplayTicker.create(new GuiEditorMain(null), 10);
                 return;
             } else if (args[0].equalsIgnoreCase(Names.Command.ALIGNMENT)) {
-                Minecraft.getMinecraft().displayGuiScreen(new GuiAlignmentEditor(null));
+                DelayedGuiDisplayTicker.create(new GuiAlignmentEditor(null), 10);
                 return;
             }
         }
