@@ -1,6 +1,6 @@
 package com.github.lunatrius.ingameinfo.tag;
 
-import com.github.lunatrius.core.util.math.MBlockPos;
+import com.github.lunatrius.ingameinfo.core.util.math.MBlockPos;
 import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.math.MathHelper;

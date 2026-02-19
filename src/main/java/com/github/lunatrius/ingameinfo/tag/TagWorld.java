@@ -1,6 +1,6 @@
 package com.github.lunatrius.ingameinfo.tag;
 
-import com.github.lunatrius.core.world.chunk.ChunkHelper;
+import com.github.lunatrius.ingameinfo.core.world.chunk.ChunkHelper;
 import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Biomes;

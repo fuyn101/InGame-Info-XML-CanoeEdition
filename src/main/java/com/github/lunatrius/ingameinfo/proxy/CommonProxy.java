@@ -1,9 +1,13 @@
 package com.github.lunatrius.ingameinfo.proxy;
 
-import com.github.lunatrius.ingameinfo.handler.ConfigurationHandler;
+import com.github.lunatrius.ingameinfo.core.handler.ConfigurationHandler;
+import com.github.lunatrius.ingameinfo.core.version.VersionChecker;
 import com.github.lunatrius.ingameinfo.network.PacketHandler;
 import com.github.lunatrius.ingameinfo.reference.Reference;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
@@ -12,7 +16,7 @@ import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 public class CommonProxy {
     public void preInit(final FMLPreInitializationEvent event) {
         Reference.logger = event.getModLog();
-        ConfigurationHandler.init(event.getSuggestedConfigurationFile());
+        com.github.lunatrius.ingameinfo.handler.ConfigurationHandler.init(event.getSuggestedConfigurationFile());
 
     }
 
@@ -21,6 +25,24 @@ public class CommonProxy {
     }
 
     public void postInit(final FMLPostInitializationEvent event) {
+        if (VersionChecker.isAllowedToCheck("Global") && ConfigurationHandler.VersionCheck.checkForUpdates) {
+            VersionChecker.startVersionCheck();
+        }
+    }
+
+    public void processIMC(final FMLInterModComms.IMCEvent event) {
+        for (final FMLInterModComms.IMCMessage message : event.getMessages()) {
+            if ("checkUpdate".equals(message.key) && message.isStringMessage()) {
+                processMessage(message.getSender(), message.getStringValue());
+            }
+        }
+    }
+
+    private void processMessage(final String sender, final String forgeVersion) {
+        final ModContainer container = Loader.instance().getIndexedModList().get(sender);
+        if (container != null) {
+            VersionChecker.registerMod(container, forgeVersion);
+        }
     }
 
     public void serverStarting(final FMLServerStartingEvent event) {

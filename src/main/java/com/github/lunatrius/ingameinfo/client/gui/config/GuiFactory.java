@@ -1,6 +1,6 @@
 package com.github.lunatrius.ingameinfo.client.gui.config;
 
-import com.github.lunatrius.core.client.gui.config.GuiConfigComplex;
+import com.github.lunatrius.ingameinfo.core.client.gui.config.GuiConfigComplex;
 import com.github.lunatrius.ingameinfo.handler.ConfigurationHandler;
 import com.github.lunatrius.ingameinfo.reference.Names;
 import com.github.lunatrius.ingameinfo.reference.Reference;

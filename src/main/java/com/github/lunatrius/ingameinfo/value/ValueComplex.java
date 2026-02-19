@@ -1,6 +1,6 @@
 package com.github.lunatrius.ingameinfo.value;
 
-import com.github.lunatrius.core.entity.EntityHelper;
+import com.github.lunatrius.ingameinfo.core.entity.EntityHelper;
 import com.github.lunatrius.ingameinfo.InGameInfoCore;
 import com.github.lunatrius.ingameinfo.client.gui.overlay.InfoIcon;
 import com.github.lunatrius.ingameinfo.client.gui.overlay.InfoItem;

@@ -1,6 +1,6 @@
 package com.github.lunatrius.ingameinfo.client.gui.overlay;
 
-import com.github.lunatrius.core.client.gui.FontRendererHelper;
+import com.github.lunatrius.ingameinfo.core.client.gui.FontRendererHelper;
 import net.minecraft.client.gui.FontRenderer;
 
 public class InfoText extends Info {

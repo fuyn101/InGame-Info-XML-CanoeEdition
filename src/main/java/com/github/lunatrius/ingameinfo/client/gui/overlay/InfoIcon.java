@@ -1,7 +1,7 @@
 package com.github.lunatrius.ingameinfo.client.gui.overlay;
 
-import com.github.lunatrius.core.client.gui.GuiHelper;
-import com.github.lunatrius.core.util.vector.Vector2f;
+import com.github.lunatrius.ingameinfo.core.client.gui.GuiHelper;
+import com.github.lunatrius.ingameinfo.core.util.vector.Vector2f;
 import com.github.lunatrius.ingameinfo.reference.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;

@@ -51,6 +51,7 @@ public class ClientProxy extends CommonProxy {
 
         MinecraftForge.EVENT_BUS.register(Ticker.INSTANCE);
         MinecraftForge.EVENT_BUS.register(ConfigurationHandler.INSTANCE);
+        MinecraftForge.EVENT_BUS.register(new com.github.lunatrius.ingameinfo.core.handler.ConfigurationHandler());
         MinecraftForge.EVENT_BUS.register(KeyInputHandler.INSTANCE);
         ClientCommandHandler.instance.registerCommand(InGameInfoCommand.INSTANCE);
     }
