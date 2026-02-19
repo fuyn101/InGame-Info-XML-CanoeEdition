@@ -261,7 +261,7 @@ public class GuiEditorMain extends GuiScreen {
         }
 
         if (isCtrlKeyDown()) {
-            if (keyCode == 19) {
+            if (keyCode == 31) {
                 saveConfig();
                 return;
             } else if (keyCode == 19) {

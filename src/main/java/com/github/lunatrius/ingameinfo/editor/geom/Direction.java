@@ -108,7 +108,7 @@ public enum Direction {
             case SOUTH_WEST: return com.github.lunatrius.ingameinfo.Alignment.BOTTOMLEFT;
             case SOUTH: return com.github.lunatrius.ingameinfo.Alignment.BOTTOMCENTER;
             case SOUTH_EAST: return com.github.lunatrius.ingameinfo.Alignment.BOTTOMRIGHT;
-            default: return com.github.lunatrius.ingameinfo.Alignment.TOPLEFT;
         }
+        return com.github.lunatrius.ingameinfo.Alignment.TOPLEFT;
     }
 }
