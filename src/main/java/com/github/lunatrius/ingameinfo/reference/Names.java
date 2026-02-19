@@ -86,4 +86,38 @@ public final class Names {
         public static final String TOGGLE = "ingameinfoxml.key.toggle";
         public static final String EDITOR = "ingameinfoxml.key.editor";
     }
+
+    public static final class Editor {
+        public static final String TITLE = "ingameinfoxml.editor.title";
+        public static final String SAVE = "ingameinfoxml.editor.save";
+        public static final String RELOAD = "ingameinfoxml.editor.reload";
+        public static final String RESET = "ingameinfoxml.editor.reset";
+        public static final String GRID = "ingameinfoxml.editor.grid";
+        public static final String SNAP = "ingameinfoxml.editor.snap";
+        public static final String POSITION = "ingameinfoxml.editor.position";
+        public static final String ALIGNMENT = "ingameinfoxml.editor.alignment";
+        public static final String SELECTED = "ingameinfoxml.editor.selected";
+        public static final String POSITION_EDITOR = "ingameinfoxml.editor.positioneditor";
+        public static final String ALIGNMENT_EDITOR = "ingameinfoxml.editor.alignmenteditor";
+        public static final String CONFIRM_TITLE = "ingameinfoxml.editor.confirm.title";
+        public static final String CONFIRM_MESSAGE = "ingameinfoxml.editor.confirm.message";
+        public static final String CONFIRM_SAVE = "ingameinfoxml.editor.confirm.save";
+        public static final String CONFIRM_DISCARD = "ingameinfoxml.editor.confirm.discard";
+        public static final String CONFIRM_CANCEL = "ingameinfoxml.editor.confirm.cancel";
+        public static final String CONFIG = "ingameinfoxml.editor.config";
+        public static final String UNSAVED = "ingameinfoxml.editor.unsaved";
+        public static final String ALIGNMENT_NONE = "ingameinfoxml.editor.alignment.none";
+        public static final String QUICK_ALIGN = "ingameinfoxml.editor.quickalign";
+        public static final String PREVIEW = "ingameinfoxml.editor.preview";
+        public static final String X_OFFSET = "ingameinfoxml.editor.xoffset";
+        public static final String Y_OFFSET = "ingameinfoxml.editor.yoffset";
+        public static final String CONTROL_CLICK = "ingameinfoxml.editor.control.click";
+        public static final String CONTROL_DRAG = "ingameinfoxml.editor.control.drag";
+        public static final String CONTROL_TAB = "ingameinfoxml.editor.control.tab";
+        public static final String CONTROL_ARROWS = "ingameinfoxml.editor.control.arrows";
+        public static final String CONTROL_G = "ingameinfoxml.editor.control.g";
+        public static final String CONTROL_CTRLS = "ingameinfoxml.editor.control.ctrls";
+        public static final String CONTROL_CTRLR = "ingameinfoxml.editor.control.ctrlr";
+        public static final String CONTROL_CTRLSNAP = "ingameinfoxml.editor.control.ctrlsnap";
+    }
 }

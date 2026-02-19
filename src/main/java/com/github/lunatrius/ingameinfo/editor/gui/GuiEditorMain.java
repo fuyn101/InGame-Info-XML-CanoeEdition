@@ -9,10 +9,12 @@ import com.github.lunatrius.ingameinfo.editor.geom.Point;
 import com.github.lunatrius.ingameinfo.editor.geom.Rect;
 import com.github.lunatrius.ingameinfo.editor.render.Color;
 import com.github.lunatrius.ingameinfo.editor.render.RenderUtil;
+import com.github.lunatrius.ingameinfo.reference.Names;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class GuiEditorMain extends GuiScreen {
     private static final int BUTTON_WIDTH = 80;
