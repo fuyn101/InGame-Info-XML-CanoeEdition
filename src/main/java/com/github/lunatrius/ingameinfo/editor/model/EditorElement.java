@@ -4,6 +4,8 @@ import com.github.lunatrius.ingameinfo.Alignment;
 import com.github.lunatrius.ingameinfo.client.gui.overlay.Info;
 import com.github.lunatrius.ingameinfo.editor.geom.Point;
 import com.github.lunatrius.ingameinfo.editor.geom.Rect;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
 
 import java.util.ArrayList;
 import java.util.List;
