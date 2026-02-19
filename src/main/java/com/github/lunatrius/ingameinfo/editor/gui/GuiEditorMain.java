@@ -46,10 +46,6 @@ public class GuiEditorMain extends GuiScreen {
     private int viewportWidth = 0;
     private int viewportHeight = 0;
 
-    private float scaleFactor = 1.0f;
-    private int offsetX = 0;
-    private int offsetY = 0;
-
     public GuiEditorMain(GuiScreen parentScreen) {
         this.parentScreen = parentScreen;
         this.editorState = new EditorState();
@@ -61,15 +57,10 @@ public class GuiEditorMain extends GuiScreen {
         int screenWidth = resolution.getScaledWidth();
         int screenHeight = resolution.getScaledHeight();
 
-        int availableWidth = screenWidth - MARGIN * 2 - SIDEBAR_WIDTH;
-        int availableHeight = screenHeight - TITLE_HEIGHT - INFO_HEIGHT - CONTROLS_HEIGHT - MARGIN * 2;
-
-        viewportWidth = availableWidth;
-        viewportHeight = availableHeight;
+        viewportWidth = screenWidth - SIDEBAR_WIDTH - MARGIN * 2;
+        viewportHeight = screenHeight - TITLE_HEIGHT - INFO_HEIGHT - CONTROLS_HEIGHT - MARGIN * 2;
         viewportX = MARGIN;
         viewportY = TITLE_HEIGHT;
-
-        calculateScaleFactor();
 
         int buttonX = screenWidth - SIDEBAR_WIDTH - MARGIN - BUTTON_WIDTH;
         int buttonY = TITLE_HEIGHT + MARGIN;
@@ -93,41 +84,20 @@ public class GuiEditorMain extends GuiScreen {
         updateButtonStates();
     }
 
-    private void calculateScaleFactor() {
-        ScaledResolution resolution = new ScaledResolution(mc);
-        int gameWidth = resolution.getScaledWidth();
-        int gameHeight = resolution.getScaledHeight();
-
-        float scaleX = (float) viewportWidth / gameWidth;
-        float scaleY = (float) viewportHeight / gameHeight;
-        scaleFactor = Math.min(scaleX, scaleY);
-
-        if (scaleFactor > 1.0f) {
-            scaleFactor = 1.0f;
-        }
-
-        offsetX = (int) ((viewportWidth - gameWidth * scaleFactor) / 2);
-        offsetY = (int) ((viewportHeight - gameHeight * scaleFactor) / 2);
-    }
-
     private Point screenToViewport(int mouseX, int mouseY) {
-        int x = (int) ((mouseX - viewportX - offsetX) / scaleFactor);
-        int y = (int) ((mouseY - viewportY - offsetY) / scaleFactor);
+        int x = mouseX - viewportX;
+        int y = mouseY - viewportY;
         return new Point(x, y);
     }
 
     private Point viewportToScreen(int x, int y) {
-        int screenX = (int) (x * scaleFactor + viewportX + offsetX);
-        int screenY = (int) (y * scaleFactor + viewportY + offsetY);
+        int screenX = x + viewportX;
+        int screenY = y + viewportY;
         return new Point(screenX, screenY);
     }
 
     private Rect scaleRect(Rect rect) {
-        int x = (int) (rect.getX() * scaleFactor + offsetX);
-        int y = (int) (rect.getY() * scaleFactor + offsetY);
-        int w = (int) (rect.getWidth() * scaleFactor);
-        int h = (int) (rect.getHeight() * scaleFactor);
-        return new Rect(x, y, w, h);
+        return rect;
     }
 
     @Override
@@ -242,9 +212,7 @@ public class GuiEditorMain extends GuiScreen {
         if (!editorState.isShowGrid()) return;
 
         Rect viewport = new Rect(viewportX, viewportY, viewportWidth, viewportHeight);
-        int scaledGridSize = (int) (editorState.getGridSize() * scaleFactor);
-        if (scaledGridSize < 5) scaledGridSize = 5;
-        RenderUtil.drawGrid(viewport, scaledGridSize, new Color(128, 128, 128, 64));
+        RenderUtil.drawGrid(viewport, editorState.getGridSize(), new Color(128, 128, 128, 64));
     }
 
     private void drawSelectedElementInfo() {
@@ -317,9 +285,7 @@ public class GuiEditorMain extends GuiScreen {
             if (selected != null) {
                 Point viewportMouse = screenToViewport(mouseX, mouseY);
                 boolean snap = editorState.isSnapToGrid() || isCtrlKeyDown();
-                int scaledGridSize = (int) (editorState.getGridSize() / scaleFactor);
-                if (scaledGridSize < 1) scaledGridSize = 1;
-                selected.updateDrag(viewportMouse.getX(), viewportMouse.getY(), snap, scaledGridSize);
+                selected.updateDrag(viewportMouse.getX(), viewportMouse.getY(), snap, editorState.getGridSize());
             }
         }
     }
@@ -372,17 +338,15 @@ public class GuiEditorMain extends GuiScreen {
         }
 
         int moveAmount = isShiftKeyDown() ? 10 : 1;
-        int scaledMoveAmount = (int) (moveAmount / scaleFactor);
-        if (scaledMoveAmount < 1) scaledMoveAmount = 1;
         
         if (keyCode == 200) {
-            editorState.moveSelectedElement(0, -scaledMoveAmount);
+            editorState.moveSelectedElement(0, -moveAmount);
         } else if (keyCode == 208) {
-            editorState.moveSelectedElement(0, scaledMoveAmount);
+            editorState.moveSelectedElement(0, moveAmount);
         } else if (keyCode == 203) {
-            editorState.moveSelectedElement(-scaledMoveAmount, 0);
+            editorState.moveSelectedElement(-moveAmount, 0);
         } else if (keyCode == 205) {
-            editorState.moveSelectedElement(scaledMoveAmount, 0);
+            editorState.moveSelectedElement(moveAmount, 0);
         }
 
         super.keyTyped(typedChar, keyCode);
