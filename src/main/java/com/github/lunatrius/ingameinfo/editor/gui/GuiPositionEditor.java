@@ -6,10 +6,12 @@ import com.github.lunatrius.ingameinfo.editor.model.EditorElement;
 import com.github.lunatrius.ingameinfo.editor.geom.Point;
 import com.github.lunatrius.ingameinfo.editor.render.Color;
 import com.github.lunatrius.ingameinfo.editor.render.RenderUtil;
+import com.github.lunatrius.ingameinfo.reference.Names;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class GuiPositionEditor extends GuiScreen {
     private static final int BUTTON_WIDTH = 80;
@@ -53,9 +55,9 @@ public class GuiPositionEditor extends GuiScreen {
 
         int buttonY = centerY - 20;
 
-        btnApply = new GuiButton(2, centerX - 85, buttonY, BUTTON_WIDTH, BUTTON_HEIGHT, "Apply");
-        btnCancel = new GuiButton(3, centerX + 5, buttonY, BUTTON_WIDTH, BUTTON_HEIGHT, "Cancel");
-        btnReset = new GuiButton(4, centerX - 85, buttonY + 25, BUTTON_WIDTH, BUTTON_HEIGHT, "Reset");
+        btnApply = new GuiButton(2, centerX - 85, buttonY, BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponentTranslation(Names.Editor.SAVE).getFormattedText());
+        btnCancel = new GuiButton(3, centerX + 5, buttonY, BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponentTranslation(Names.Editor.CONFIRM_CANCEL).getFormattedText());
+        btnReset = new GuiButton(4, centerX - 85, buttonY + 25, BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponentTranslation(Names.Editor.RESET).getFormattedText());
 
         int gridY = centerY + 20;
         int gridX = centerX - 90;
@@ -155,18 +157,22 @@ public class GuiPositionEditor extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawDefaultBackground();
 
-        drawCenteredString(fontRenderer, "Position Editor", width / 2, 10, Color.WHITE.getPacked());
+        String title = new TextComponentTranslation(Names.Editor.POSITION_EDITOR).getFormattedText();
+        drawCenteredString(fontRenderer, title, width / 2, 10, Color.WHITE.getPacked());
 
         int centerX = width / 2;
         int centerY = height / 2;
 
-        fontRenderer.drawString("X Position:", centerX - 100, centerY - 45, Color.WHITE.getPacked());
-        fontRenderer.drawString("Y Position:", centerX - 30, centerY - 45, Color.WHITE.getPacked());
+        String xPosText = new TextComponentTranslation(Names.Editor.X_OFFSET).getFormattedText();
+        String yPosText = new TextComponentTranslation(Names.Editor.Y_OFFSET).getFormattedText();
+        fontRenderer.drawString(xPosText, centerX - 100, centerY - 45, Color.WHITE.getPacked());
+        fontRenderer.drawString(yPosText, centerX - 30, centerY - 45, Color.WHITE.getPacked());
 
         txtX.drawTextBox();
         txtY.drawTextBox();
 
-        fontRenderer.drawString("Quick Align:", centerX - 100, centerY + 10, Color.GRAY.getPacked());
+        String quickAlignText = new TextComponentTranslation(Names.Editor.QUICK_ALIGN).getFormattedText();
+        fontRenderer.drawString(quickAlignText, centerX - 100, centerY + 10, Color.GRAY.getPacked());
 
         drawPreview(centerX, centerY + 100);
 

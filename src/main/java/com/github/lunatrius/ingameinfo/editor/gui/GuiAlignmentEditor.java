@@ -8,11 +8,13 @@ import com.github.lunatrius.ingameinfo.editor.geom.Point;
 import com.github.lunatrius.ingameinfo.editor.geom.Rect;
 import com.github.lunatrius.ingameinfo.editor.render.Color;
 import com.github.lunatrius.ingameinfo.editor.render.RenderUtil;
+import com.github.lunatrius.ingameinfo.reference.Names;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiSlot;
 import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class GuiAlignmentEditor extends GuiScreen {
     private static final int SLOT_HEIGHT = 24;
@@ -54,8 +56,8 @@ public class GuiAlignmentEditor extends GuiScreen {
         int buttonY = height - 25;
         int centerX = width / 2;
 
-        btnDone = new GuiButton(2, centerX - 85, buttonY, 80, 20, "Done");
-        btnReset = new GuiButton(3, centerX + 5, buttonY, 80, 20, "Reset");
+        btnDone = new GuiButton(2, centerX - 85, buttonY, 80, 20, new TextComponentTranslation(Names.Editor.SAVE).getFormattedText());
+        btnReset = new GuiButton(3, centerX + 5, buttonY, 80, 20, new TextComponentTranslation(Names.Editor.RESET).getFormattedText());
 
         buttonList.add(btnDone);
         buttonList.add(btnReset);
@@ -128,16 +130,21 @@ public class GuiAlignmentEditor extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawDefaultBackground();
 
-        drawCenteredString(fontRenderer, "Alignment Editor", width / 2, 10, Color.WHITE.getPacked());
+        String title = new TextComponentTranslation(Names.Editor.ALIGNMENT_EDITOR).getFormattedText();
+        drawCenteredString(fontRenderer, title, width / 2, 10, Color.WHITE.getPacked());
 
         alignmentSlot.drawScreen(mouseX, mouseY, partialTicks);
 
         int rightX = width - 150;
         int topY = 30;
 
-        fontRenderer.drawString("Selected: " + selectedAlignment.toString(), rightX, topY, Color.YELLOW.getPacked());
-        fontRenderer.drawString("X Offset:", rightX, topY + 25, Color.WHITE.getPacked());
-        fontRenderer.drawString("Y Offset:", rightX + 70, topY + 25, Color.WHITE.getPacked());
+        String selectedText = new TextComponentTranslation(Names.Editor.SELECTED).getFormattedText();
+        fontRenderer.drawString(selectedText + ": " + selectedAlignment.toString(), rightX, topY, Color.YELLOW.getPacked());
+
+        String xPosText = new TextComponentTranslation(Names.Editor.X_OFFSET).getFormattedText();
+        String yPosText = new TextComponentTranslation(Names.Editor.Y_OFFSET).getFormattedText();
+        fontRenderer.drawString(xPosText, rightX, topY + 25, Color.WHITE.getPacked());
+        fontRenderer.drawString(yPosText, rightX + 70, topY + 25, Color.WHITE.getPacked());
 
         txtOffsetX.drawTextBox();
         txtOffsetY.drawTextBox();
@@ -153,7 +160,7 @@ public class GuiAlignmentEditor extends GuiScreen {
 
         RenderUtil.drawBorderRect(previewRect, Color.GRAY);
 
-        String label = "Preview";
+        String label = new TextComponentTranslation(Names.Editor.PREVIEW).getFormattedText();
         RenderUtil.drawString(label, new Point(x + previewSize / 2 - fontRenderer.getStringWidth(label) / 2, y - 12), Color.GRAY);
 
         int centerX = x + previewSize / 2;

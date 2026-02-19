@@ -4,9 +4,11 @@ import java.io.IOException;
 
 import com.github.lunatrius.ingameinfo.editor.render.Color;
 import com.github.lunatrius.ingameinfo.editor.render.RenderUtil;
+import com.github.lunatrius.ingameinfo.reference.Names;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class GuiConfirmSave extends GuiScreen {
     private static final int BUTTON_WIDTH = 100;
@@ -29,9 +31,9 @@ public class GuiConfirmSave extends GuiScreen {
         int centerX = width / 2;
         int centerY = height / 2;
 
-        btnSave = new GuiButton(0, centerX - BUTTON_WIDTH - 5, centerY + 20, BUTTON_WIDTH, BUTTON_HEIGHT, "Save");
-        btnDiscard = new GuiButton(1, centerX + 5, centerY + 20, BUTTON_WIDTH, BUTTON_HEIGHT, "Don't Save");
-        btnCancel = new GuiButton(2, centerX - BUTTON_WIDTH / 2, centerY + 45, BUTTON_WIDTH, BUTTON_HEIGHT, "Cancel");
+        btnSave = new GuiButton(0, centerX - BUTTON_WIDTH - 5, centerY + 20, BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponentTranslation(Names.Editor.CONFIRM_SAVE).getFormattedText());
+        btnDiscard = new GuiButton(1, centerX + 5, centerY + 20, BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponentTranslation(Names.Editor.CONFIRM_DISCARD).getFormattedText());
+        btnCancel = new GuiButton(2, centerX - BUTTON_WIDTH / 2, centerY + 45, BUTTON_WIDTH, BUTTON_HEIGHT, new TextComponentTranslation(Names.Editor.CONFIRM_CANCEL).getFormattedText());
 
         buttonList.add(btnSave);
         buttonList.add(btnDiscard);
@@ -57,10 +59,10 @@ public class GuiConfirmSave extends GuiScreen {
         int centerX = width / 2;
         int centerY = height / 2;
 
-        String title = "Unsaved Changes";
+        String title = new TextComponentTranslation(Names.Editor.CONFIRM_TITLE).getFormattedText();
         drawCenteredString(fontRenderer, title, centerX, centerY - 20, Color.YELLOW.getPacked());
 
-        String message = "Do you want to save your changes before closing?";
+        String message = new TextComponentTranslation(Names.Editor.CONFIRM_MESSAGE).getFormattedText();
         drawCenteredString(fontRenderer, message, centerX, centerY, Color.WHITE.getPacked());
 
         super.drawScreen(mouseX, mouseY, partialTicks);
