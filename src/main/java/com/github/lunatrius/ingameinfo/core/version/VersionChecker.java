@@ -13,12 +13,7 @@ import net.minecraftforge.fml.common.versioning.ComparableVersion;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class VersionChecker {
     public static final String VER_CHECK_API_URL = "http://mc.lunatri.us/json?v=%d&mc=%s&limit=5";

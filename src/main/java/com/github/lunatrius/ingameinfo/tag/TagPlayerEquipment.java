@@ -1,7 +1,7 @@
 package com.github.lunatrius.ingameinfo.tag;
 
-import com.github.lunatrius.ingameinfo.core.entity.EntityHelper;
 import com.github.lunatrius.ingameinfo.client.gui.overlay.InfoItem;
+import com.github.lunatrius.ingameinfo.core.entity.EntityHelper;
 import com.github.lunatrius.ingameinfo.tag.registry.TagRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;

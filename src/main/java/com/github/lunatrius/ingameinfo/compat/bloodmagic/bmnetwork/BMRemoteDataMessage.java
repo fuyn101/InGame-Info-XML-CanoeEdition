@@ -2,7 +2,6 @@ package com.github.lunatrius.ingameinfo.compat.bloodmagic.bmnetwork;
 
 import WayofTime.bloodmagic.core.data.SoulNetwork;
 import WayofTime.bloodmagic.util.helper.NetworkHelper;
-
 import com.github.lunatrius.ingameinfo.network.PacketHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;

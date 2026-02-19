@@ -1,9 +1,9 @@
 package com.github.lunatrius.ingameinfo.value;
 
-import com.github.lunatrius.ingameinfo.core.entity.EntityHelper;
 import com.github.lunatrius.ingameinfo.InGameInfoCore;
 import com.github.lunatrius.ingameinfo.client.gui.overlay.InfoIcon;
 import com.github.lunatrius.ingameinfo.client.gui.overlay.InfoItem;
+import com.github.lunatrius.ingameinfo.core.entity.EntityHelper;
 import com.github.lunatrius.ingameinfo.handler.ConfigurationHandler;
 import com.github.lunatrius.ingameinfo.reference.Reference;
 import com.github.lunatrius.ingameinfo.tag.Tag;

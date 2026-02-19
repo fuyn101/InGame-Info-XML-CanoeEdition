@@ -1,8 +1,8 @@
 package com.github.lunatrius.ingameinfo.command;
 
-import com.github.lunatrius.ingameinfo.core.handler.DelayedGuiDisplayTicker;
 import com.github.lunatrius.ingameinfo.InGameInfoCore;
 import com.github.lunatrius.ingameinfo.client.gui.tag.GuiTags;
+import com.github.lunatrius.ingameinfo.core.handler.DelayedGuiDisplayTicker;
 import com.github.lunatrius.ingameinfo.handler.ConfigurationHandler;
 import com.github.lunatrius.ingameinfo.handler.Ticker;
 import com.github.lunatrius.ingameinfo.reference.Names;

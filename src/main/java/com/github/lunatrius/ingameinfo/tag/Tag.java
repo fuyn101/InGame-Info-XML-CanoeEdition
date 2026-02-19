@@ -1,8 +1,8 @@
 package com.github.lunatrius.ingameinfo.tag;
 
+import com.github.lunatrius.ingameinfo.client.gui.overlay.Info;
 import com.github.lunatrius.ingameinfo.core.util.math.MBlockPos;
 import com.github.lunatrius.ingameinfo.core.util.vector.Vector3f;
-import com.github.lunatrius.ingameinfo.client.gui.overlay.Info;
 import com.github.lunatrius.ingameinfo.reference.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
