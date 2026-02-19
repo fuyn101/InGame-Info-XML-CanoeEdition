@@ -35,6 +35,8 @@ public final class Names {
         public static final String ENABLE = "enable";
         public static final String DISABLE = "disable";
         public static final String TAGLIST = "taglist";
+        public static final String EDIT = "edit";
+        public static final String ALIGNMENT = "alignment";
     }
 
     public static final class Config {
@@ -82,5 +84,6 @@ public final class Names {
     public static final class Keys {
         public static final String CATEGORY = "ingameinfoxml.key.category";
         public static final String TOGGLE = "ingameinfoxml.key.toggle";
+        public static final String EDITOR = "ingameinfoxml.key.editor";
     }
 }

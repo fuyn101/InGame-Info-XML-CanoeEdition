@@ -3,10 +3,13 @@ package com.github.lunatrius.ingameinfo.command;
 import com.github.lunatrius.ingameinfo.InGameInfoCore;
 import com.github.lunatrius.ingameinfo.client.gui.tag.GuiTags;
 import com.github.lunatrius.ingameinfo.core.handler.DelayedGuiDisplayTicker;
+import com.github.lunatrius.ingameinfo.editor.gui.GuiAlignmentEditor;
+import com.github.lunatrius.ingameinfo.editor.gui.GuiEditorMain;
 import com.github.lunatrius.ingameinfo.handler.ConfigurationHandler;
 import com.github.lunatrius.ingameinfo.handler.Ticker;
 import com.github.lunatrius.ingameinfo.reference.Names;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -49,7 +52,7 @@ public class InGameInfoCommand extends CommandBase {
     @Override
     public List<String> getTabCompletions(final MinecraftServer server, final ICommandSender sender, final String[] args, final @Nullable BlockPos pos) {
         if (args.length == 1) {
-            return getListOfStringsMatchingLastWord(args, Names.Command.RELOAD, Names.Command.LOAD, Names.Command.SAVE, Names.Command.ENABLE, Names.Command.DISABLE, Names.Command.TAGLIST);
+            return getListOfStringsMatchingLastWord(args, Names.Command.RELOAD, Names.Command.LOAD, Names.Command.SAVE, Names.Command.ENABLE, Names.Command.DISABLE, Names.Command.TAGLIST, Names.Command.EDIT, Names.Command.ALIGNMENT);
         } else if (args.length == 2) {
             if (args[0].equalsIgnoreCase(Names.Command.LOAD)) {
                 return getListOfStringsMatchingLastWord(args, getFilenames());
@@ -108,6 +111,12 @@ public class InGameInfoCommand extends CommandBase {
                 return;
             } else if (args[0].equalsIgnoreCase(Names.Command.TAGLIST)) {
                 DelayedGuiDisplayTicker.create(new GuiTags(), 10);
+                return;
+            } else if (args[0].equalsIgnoreCase(Names.Command.EDIT)) {
+                Minecraft.getMinecraft().displayGuiScreen(new GuiEditorMain(null));
+                return;
+            } else if (args[0].equalsIgnoreCase(Names.Command.ALIGNMENT)) {
+                Minecraft.getMinecraft().displayGuiScreen(new GuiAlignmentEditor(null));
                 return;
             }
         }

@@ -244,9 +244,12 @@ ingameinfoxml.tag.temperature.desc=生物群系温度.
 ingameinfoxml.tag.humidity.desc=生物群系湿度.
 
 # keys
+ingameinfoxml.key.category=InGame Info XML
+ingameinfoxml.key.toggle=切换显示
+ingameinfoxml.key.editor=打开编辑器
 
 # commands
-commands.ingameinfoxml.usage=/igi <reload|load|save|enable|disable|taglist|config> [文件名]
+commands.ingameinfoxml.usage=/igi <reload|load|save|enable|disable|taglist|edit|alignment> [文件名]
 commands.ingameinfoxml.reload=正在重新加载...
 commands.ingameinfoxml.load=正在加载%s...
 commands.ingameinfoxml.save=正在保存%s...
@@ -254,3 +257,21 @@ commands.ingameinfoxml.success=完成!
 commands.ingameinfoxml.failure=出现了错误!
 commands.ingameinfoxml.enable=InGame Info XML界面现在已启用.
 commands.ingameinfoxml.disable=InGame Info XML界面现在已禁用.
+
+# editor
+ingameinfoxml.editor.title=InGame Info XML 编辑器
+ingameinfoxml.editor.save=保存
+ingameinfoxml.editor.reload=重新加载
+ingameinfoxml.editor.reset=重置
+ingameinfoxml.editor.grid=网格
+ingameinfoxml.editor.snap=吸附
+ingameinfoxml.editor.position=位置
+ingameinfoxml.editor.alignment=对齐
+ingameinfoxml.editor.selected=已选择
+ingameinfoxml.editor.positioneditor=位置编辑器
+ingameinfoxml.editor.alignmenteditor=对齐编辑器
+ingameinfoxml.editor.confirm.title=未保存的更改
+ingameinfoxml.editor.confirm.message=关闭前是否保存更改?
+ingameinfoxml.editor.confirm.save=保存
+ingameinfoxml.editor.confirm.discard=不保存
+ingameinfoxml.editor.confirm.cancel=取消

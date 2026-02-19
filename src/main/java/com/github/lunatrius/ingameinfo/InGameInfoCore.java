@@ -253,4 +253,23 @@ public class InGameInfoCore {
 
         return "";
     }
+
+    public Map<Alignment, List<List<Value>>> getFormat() {
+        return this.format;
+    }
+
+    public List<Info> getInfoList() {
+        return this.info;
+    }
+
+    public List<Alignment> getAlignmentList() {
+        return new ArrayList<Alignment>(this.format.keySet());
+    }
+
+    public String getConfigName() {
+        if (this.configFile != null) {
+            return this.configFile.getName();
+        }
+        return "default";
+    }
 }

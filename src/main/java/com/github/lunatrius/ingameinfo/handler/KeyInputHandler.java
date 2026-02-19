@@ -1,5 +1,6 @@
 package com.github.lunatrius.ingameinfo.handler;
 
+import com.github.lunatrius.ingameinfo.editor.gui.GuiEditorMain;
 import com.github.lunatrius.ingameinfo.reference.Names;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -11,9 +12,11 @@ public class KeyInputHandler {
     public static final KeyInputHandler INSTANCE = new KeyInputHandler();
 
     private static final KeyBinding KEY_BINDING_TOGGLE = new KeyBinding(Names.Keys.TOGGLE, Keyboard.KEY_NONE, Names.Keys.CATEGORY);
+    private static final KeyBinding KEY_BINDING_EDITOR = new KeyBinding(Names.Keys.EDITOR, Keyboard.KEY_NONE, Names.Keys.CATEGORY);
 
     public static final KeyBinding[] KEY_BINDINGS = new KeyBinding[] {
-            KEY_BINDING_TOGGLE
+            KEY_BINDING_TOGGLE,
+            KEY_BINDING_EDITOR
     };
 
     private final Minecraft minecraft = Minecraft.getMinecraft();
@@ -25,6 +28,9 @@ public class KeyInputHandler {
         if (this.minecraft.currentScreen == null) {
             if (KEY_BINDING_TOGGLE.isPressed()) {
                 Ticker.enabled = !Ticker.enabled;
+            }
+            if (KEY_BINDING_EDITOR.isPressed()) {
+                this.minecraft.displayGuiScreen(new GuiEditorMain(null));
             }
         }
     }
