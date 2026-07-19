@@ -68,6 +68,9 @@
             <var>fps</var>
         </line>
         <line>
+            <str>TPS: $e{tps}$f, MSPT: $e{mspt}$f</str>
+        </line>
+        <line>
             <str>Entities: $e{entitiesrendered}$f / $e{entitiestotal}$f</str>
         </line>
     </lines>
