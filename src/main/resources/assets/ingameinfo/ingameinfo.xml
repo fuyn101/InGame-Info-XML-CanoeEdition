@@ -2,6 +2,12 @@
 <config>
     <lines at="topleft">
         <line>
+            <str>$e[LemonSkin]</str>
+        </line>
+        <line>
+            <str>hunger: {foodlevel}, sat: {saturation}, exh: {exhaustion}/4</str>
+        </line>
+        <line>
             <str>Day {day}, {mctime} (</str>
             <if>
                 <var>daytime</var>
@@ -66,9 +72,7 @@
                 <str/>
             </operation>
             <var>fps</var>
-        </line>
-        <line>
-            <str>TPS: $e{tps}$f, MSPT: $e{mspt}$f</str>
+            <str>$f, TPS: $e{tps}$f, MSPT: $e{mspt}$f</str>
         </line>
         <line>
             <str>Entities: $e{entitiesrendered}$f / $e{entitiestotal}$f</str>
