@@ -42,6 +42,7 @@ gui.ingameinfoxml.taglist=標籤列表
 # gui - tag list - categories
 ingameinfoxml.tag.category.formatting.name=文字樣式
 ingameinfoxml.tag.category.misc.name=雜項
+ingameinfoxml.tag.category.performance.name=效能
 ingameinfoxml.tag.category.mouseover.name=游標懸停
 ingameinfoxml.tag.category.nearbyplayer.name=附近玩家
 ingameinfoxml.tag.category.playerequipment.name=玩家 - 裝備
@@ -92,6 +93,10 @@ ingameinfoxml.tag.serverip.desc=伺服器IP, 如果是本地遊戲則顯示為12
 ingameinfoxml.tag.serverport.desc=伺服器端口號, 如果是本地遊戲則顯示為-1
 ingameinfoxml.tag.ping.desc=當前ping值, 如果沒有數據則顯示為-1.
 ingameinfoxml.tag.pingicon.desc=對應當前ping值的圖標, 如果沒有數據則不顯示任何東西.
+
+# gui - tag list - performance
+ingameinfoxml.tag.tps.desc=伺服器平均每秒刻數, 最高為20.00.
+ingameinfoxml.tag.mspt.desc=伺服器平均每刻耗時, 單位為毫秒.
 
 # gui - tag list - mouse over
 ingameinfoxml.tag.mouseovername.desc=游標下實體或方塊的名稱, 如果游標下什麼都沒有則不顯示任何東西.

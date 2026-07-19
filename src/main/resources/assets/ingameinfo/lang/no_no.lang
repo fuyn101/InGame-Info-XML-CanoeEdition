@@ -42,6 +42,7 @@ gui.ingameinfoxml.taglist=Liste over tagger
 # gui - tag list - categories
 ingameinfoxml.tag.category.formatting.name=Formatering
 ingameinfoxml.tag.category.misc.name=Diverse
+ingameinfoxml.tag.category.performance.name=Ytelse
 ingameinfoxml.tag.category.mouseover.name=Musepekeren over
 ingameinfoxml.tag.category.nearbyplayer.name=Spillere i nærheten
 ingameinfoxml.tag.category.playerequipment.name=Spiller - utstyr
@@ -91,6 +92,10 @@ ingameinfoxml.tag.serverip.desc=Tjenerens IP-adresse, 127.0.0.1 hvis det er et l
 ingameinfoxml.tag.serverport.desc=Tjenerens port, -1 hvis det er et lokalt spill.
 ingameinfoxml.tag.ping.desc=Nåværende responstid, -1 hvis data mangler.
 ingameinfoxml.tag.pingicon.desc=Nåværende responstidsikon, ingen tekst hvis data mangler.
+
+# gui - tag list - performance
+ingameinfoxml.tag.tps.desc=Gjennomsnittlige serverticks per sekund, begrenset til 20.00.
+ingameinfoxml.tag.mspt.desc=Gjennomsnittlige millisekunder per servertick.
 
 # gui - tag list - mouse over
 ingameinfoxml.tag.mouseovername.desc=Navnet på enheten eller blokken under musepekeren, ingenting hvis det ikke er noen.

@@ -44,6 +44,7 @@ gui.ingameinfoxml.taglist=Lista Tagów
 # gui - tag list - categories
 ingameinfoxml.tag.category.formatting.name=Formatowanie
 ingameinfoxml.tag.category.misc.name=Różne
+ingameinfoxml.tag.category.performance.name=Wydajność
 ingameinfoxml.tag.category.mouseover.name=Wskaźnik Myszy
 ingameinfoxml.tag.category.nearbyplayer.name=Pobliscy Gracze
 ingameinfoxml.tag.category.playerequipment.name=Gracz - Ekwipunek
@@ -96,6 +97,10 @@ ingameinfoxml.tag.serverip.desc=IP serwera, 127.0.0.1 jeśli jest to gra lokalna
 ingameinfoxml.tag.serverport.desc=Port serwera, -1 jeśli jest to gra lokalna.
 ingameinfoxml.tag.ping.desc=Obecny ping, -1 jeśli brak danych.
 ingameinfoxml.tag.pingicon.desc=Ikona obecnego pingu, pusto jeśli brak danych.
+
+# gui - tag list - performance
+ingameinfoxml.tag.tps.desc=Średnia liczba ticków serwera na sekundę, maksymalnie 20.00.
+ingameinfoxml.tag.mspt.desc=Średni czas ticka serwera w milisekundach.
 
 # gui - tag list - mouse over
 ingameinfoxml.tag.mouseovername.desc=Nazwa obiektu lub bloku pod kursorem, pusto jeśli nie ma tam niczego.

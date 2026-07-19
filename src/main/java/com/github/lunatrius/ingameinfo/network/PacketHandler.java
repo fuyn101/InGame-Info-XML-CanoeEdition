@@ -4,6 +4,8 @@ import com.github.lunatrius.ingameinfo.compat.bloodmagic.bmnetwork.BMRemoteDataM
 import com.github.lunatrius.ingameinfo.compat.bloodmagic.bmnetwork.BMResponseMessage;
 import com.github.lunatrius.ingameinfo.compat.thaumcraft.tcnetwork.TCRemoteDataMessage;
 import com.github.lunatrius.ingameinfo.compat.thaumcraft.tcnetwork.TCResponseMessage;
+import com.github.lunatrius.ingameinfo.network.message.MessagePerformanceRequest;
+import com.github.lunatrius.ingameinfo.network.message.MessagePerformanceResponse;
 import com.github.lunatrius.ingameinfo.network.message.MessageSeed;
 import com.github.lunatrius.ingameinfo.reference.Reference;
 import net.minecraftforge.fml.common.Loader;
@@ -16,6 +18,8 @@ public class PacketHandler {
 
     public static void init() {
         INSTANCE.registerMessage(MessageSeed.class, MessageSeed.class, 0, Side.CLIENT);
+        INSTANCE.registerMessage(MessagePerformanceResponse.Handler.class, MessagePerformanceResponse.class, 5, Side.CLIENT);
+        INSTANCE.registerMessage(MessagePerformanceRequest.Handler.class, MessagePerformanceRequest.class, 6, Side.SERVER);
 
         if (Loader.isModLoaded("thaumcraft")) {
             INSTANCE.registerMessage(TCResponseMessage.ResponseHandler.class, TCResponseMessage.class, 1, Side.CLIENT);

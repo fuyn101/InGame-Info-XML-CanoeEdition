@@ -48,6 +48,7 @@ gui.ingameinfoxml.taglist=タグリスト
 # gui - tag list - categories
 ingameinfoxml.tag.category.formatting.name=書式設定
 ingameinfoxml.tag.category.misc.name=その他
+ingameinfoxml.tag.category.performance.name=パフォーマンス
 ingameinfoxml.tag.category.mouseover.name=マウスオーバー
 ingameinfoxml.tag.category.nearbyplayer.name=近くのプレイヤー
 ingameinfoxml.tag.category.playerequipment.name=プレイヤー - 装備
@@ -102,6 +103,10 @@ ingameinfoxml.tag.serverip.desc=サーバーのIP。 のローカルゲーム場
 ingameinfoxml.tag.serverport.desc=サーバーポート。 ローカルゲームの場合は-1。
 ingameinfoxml.tag.ping.desc=現在のping。 データが無い場合は-1。
 ingameinfoxml.tag.pingicon.desc=現在のpingアイコン。データが無い場合はからの文字列。
+
+# gui - tag list - performance
+ingameinfoxml.tag.tps.desc=サーバーの平均TPS。上限は20.00。
+ingameinfoxml.tag.mspt.desc=サーバーの平均ミリ秒/ティック。
 
 # gui - tag list - mouse over
 ingameinfoxml.tag.mouseovername.desc=カーソルの下のエンティティまたはブロックの名前。何もない場合は空の文字列。
